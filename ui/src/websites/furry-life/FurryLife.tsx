@@ -49,9 +49,7 @@ interface FurryLifeFileSubmissionState {
   folders: Folder[];
 }
 
-export class FurryLifeFileSubmissionForm extends GenericFileSubmissionSection<
-  FurryLifeFileOptions
-> {
+export class FurryLifeFileSubmissionForm extends GenericFileSubmissionSection<FurryLifeFileOptions> {
   state: FurryLifeFileSubmissionState = {
     folders: []
   };

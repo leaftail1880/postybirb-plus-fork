@@ -85,7 +85,9 @@ export default class SubmissionQueue extends React.Component<Props> {
                   <span>
                     {posting.submission.type === SubmissionType.FILE ? (
                       <Avatar
-                        src={RemoteService.getFileUrl((posting.submission as FileSubmission).primary.preview)}
+                        src={RemoteService.getFileUrl(
+                          (posting.submission as FileSubmission).primary.preview
+                        )}
                         shape="square"
                       />
                     ) : (
@@ -135,7 +137,10 @@ export default class SubmissionQueue extends React.Component<Props> {
                   avatar={
                     <span>
                       {item.type === SubmissionType.FILE ? (
-                        <Avatar src={RemoteService.getFileUrl((item as FileSubmission).primary.preview)} shape="square" />
+                        <Avatar
+                          src={RemoteService.getFileUrl((item as FileSubmission).primary.preview)}
+                          shape="square"
+                        />
                       ) : (
                         <Avatar icon="notification" shape="square" />
                       )}

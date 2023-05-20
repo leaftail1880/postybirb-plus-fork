@@ -76,9 +76,7 @@ interface FurAffinityFileSubmissionState {
   folders: Folder[];
 }
 
-class FurAffinityNotificationSubmissionForm extends GenericSubmissionSection<
-  FurAffinityNotificationOptions
-> {
+class FurAffinityNotificationSubmissionForm extends GenericSubmissionSection<FurAffinityNotificationOptions> {
   renderLeftForm(data: FurAffinityNotificationOptions) {
     const elements = super.renderLeftForm(data);
     elements.push(
@@ -92,9 +90,7 @@ class FurAffinityNotificationSubmissionForm extends GenericSubmissionSection<
   }
 }
 
-export class FurAffinityFileSubmissionForm extends GenericFileSubmissionSection<
-  FurAffinityFileOptions
-> {
+export class FurAffinityFileSubmissionForm extends GenericFileSubmissionSection<FurAffinityFileOptions> {
   state: FurAffinityFileSubmissionState = {
     folders: []
   };

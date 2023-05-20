@@ -49,9 +49,7 @@ interface DeviantArtFileSubmissionState {
   folders: Folder[];
 }
 
-export class DeviantArtFileSubmissionForm extends GenericFileSubmissionSection<
-  DeviantArtFileOptions
-> {
+export class DeviantArtFileSubmissionForm extends GenericFileSubmissionSection<DeviantArtFileOptions> {
   state: DeviantArtFileSubmissionState = {
     folders: []
   };

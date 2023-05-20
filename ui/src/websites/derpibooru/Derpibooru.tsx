@@ -21,9 +21,7 @@ export class Derpibooru extends WebsiteImpl {
   );
 }
 
-export class DerpibooruFileSubmissionForm extends GenericFileSubmissionSection<
-  DerpibooruFileOptions
-> {
+export class DerpibooruFileSubmissionForm extends GenericFileSubmissionSection<DerpibooruFileOptions> {
   constructor(props: WebsiteSectionProps<FileSubmission, DerpibooruFileOptions>) {
     super(props);
     this.state = {

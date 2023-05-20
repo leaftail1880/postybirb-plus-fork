@@ -79,10 +79,10 @@ export class PicartoFileSubmissionForm extends GenericFileSubmissionSection<Pica
           value={data.visibility ?? null}
           onChange={this.setValue.bind(this, 'visibility')}
         >
-            <Select.Option value="PUBLIC">Public</Select.Option>
-            <Select.Option value="PRIVATE">Private</Select.Option>
-            <Select.Option value="FOLLOWER_SUBSCRIBER">Followers only</Select.Option>
-            <Select.Option value="SUBSCRIBER">Subscribers only</Select.Option>
+          <Select.Option value="PUBLIC">Public</Select.Option>
+          <Select.Option value="PRIVATE">Private</Select.Option>
+          <Select.Option value="FOLLOWER_SUBSCRIBER">Followers only</Select.Option>
+          <Select.Option value="SUBSCRIBER">Subscribers only</Select.Option>
         </Select>
       </Form.Item>,
       <Form.Item label="Folders">

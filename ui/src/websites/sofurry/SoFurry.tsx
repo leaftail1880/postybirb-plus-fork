@@ -71,9 +71,7 @@ interface SoFurrySubmissionState {
   folders: Folder[];
 }
 
-export class SoFurryNotificationSubmissionForm extends GenericSubmissionSection<
-  SoFurryNotificationOptions
-> {
+export class SoFurryNotificationSubmissionForm extends GenericSubmissionSection<SoFurryNotificationOptions> {
   state: SoFurrySubmissionState = {
     folders: []
   };

@@ -42,17 +42,23 @@ export default class PixelfedLogin extends React.Component<LoginDialogProps, Sta
       // view.addEventListener('did-start-navigation', (url, isInPlace, isMainFrame, frameProcessId, frameRoutingId) => {
       // });
 
-      view.addEventListener('did-redirect-navigation', (url, isInPlace, isMainframe, frameProcessId, frameRoutingId) => {
-        if (url.url.includes("urn:ietf:wg:oauth:2.0:oob")) {
-          // We have a token ! 
-          this.setState({ code: url.url.replace("urn:ietf:wg:oauth:2.0:oob?code=", "") });
+      view.addEventListener(
+        'did-redirect-navigation',
+        (url, isInPlace, isMainframe, frameProcessId, frameRoutingId) => {
+          if (url.url.includes('urn:ietf:wg:oauth:2.0:oob')) {
+            // We have a token !
+            this.setState({ code: url.url.replace('urn:ietf:wg:oauth:2.0:oob?code=', '') });
+          }
         }
-      });
-      
-      view.addEventListener('will-redirect', (event, url, isInPlace, isMainFrame, frameProcessId, frameRoutingId) => {
-        console.log(url);
-      });
-      
+      );
+
+      view.addEventListener(
+        'will-redirect',
+        (event, url, isInPlace, isMainFrame, frameProcessId, frameRoutingId) => {
+          console.log(url);
+        }
+      );
+
       view.allowpopups = false;
       view.partition = `persist:${this.props.account._id}`;
       view.src = this.getAuthURL();

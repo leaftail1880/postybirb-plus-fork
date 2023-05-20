@@ -53,9 +53,9 @@ export class EditableSubmissions extends React.Component<Props, State> {
 
   deleteSubmissions(submissions: SubmissionPackage<any>[]) {
     this.setState({ deleteModalVisible: false });
-    Promise.all(
-      submissions.map(s => SubmissionService.deleteSubmission(s.submission._id))
-    ).finally(() => message.success('Submissions deleted.'));
+    Promise.all(submissions.map(s => SubmissionService.deleteSubmission(s.submission._id))).finally(
+      () => message.success('Submissions deleted.')
+    );
   }
 
   async postSubmissions(submissions: SubmissionPackage<any>[]) {
@@ -106,9 +106,7 @@ export class EditableSubmissions extends React.Component<Props, State> {
 
   render() {
     const submissions = this.props.submissions.filter(s =>
-      SubmissionUtil.getSubmissionTitle(s)
-        .toLowerCase()
-        .includes(this.state.search)
+      SubmissionUtil.getSubmissionTitle(s).toLowerCase().includes(this.state.search)
     );
     return (
       <div className="editable-submissions">

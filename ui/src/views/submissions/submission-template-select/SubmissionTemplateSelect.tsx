@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import { inject, observer } from 'mobx-react';
-import { Form, Select } from 'antd';
+import { Form, Select, message } from 'antd';
 import { SubmissionPart } from 'postybirb-commons';
 import { SubmissionType } from 'postybirb-commons';
 import { SubmissionStore } from '../../../stores/submission.store';
@@ -26,7 +26,6 @@ interface Props {
 @inject('submissionStore', 'submissionTemplateStore')
 @observer
 export default class SubmissionTemplateSelect extends React.Component<Props> {
-
   showSubmissions(): boolean {
     return this.props.showSubmissions !== false;
   }
@@ -63,12 +62,12 @@ export default class SubmissionTemplateSelect extends React.Component<Props> {
     return (
       <Select.OptGroup key={label} label={label}>
         {records
-        .sort((a, b) => a.label.localeCompare(b.label))
-        .map(r => (
-          <Select.Option key={r.value} value={`${type}:${r.value}`}>
-            {r.label}
-          </Select.Option>
-        ))}
+          .sort((a, b) => a.label.localeCompare(b.label))
+          .map(r => (
+            <Select.Option key={r.value} value={`${type}:${r.value}`}>
+              {r.label}
+            </Select.Option>
+          ))}
       </Select.OptGroup>
     );
   }
@@ -106,15 +105,21 @@ export default class SubmissionTemplateSelect extends React.Component<Props> {
 
   handleSelect = (value: string | number | LabeledValue, option: React.ReactElement<any>) => {
     const [type, id] = value.toString().split(':');
-    
+
     let parts: Record<string, SubmissionPart<any>> = {};
     switch (type as TemplateType) {
-        case 'SUBMISSION':
-            parts = this.props.submissionStore?.getSubmission(id)!.parts;
-            break;
-        case 'TEMPLATE':
-            parts = this.props.submissionTemplateStore?.getSubmissionTemplate(id)!.parts;
-            break;
+      case 'SUBMISSION':
+        const submissions = this.props.submissionStore?.getSubmission(id)!.parts;
+        if (typeof submissions === 'undefined') return message.error('Unable to find submission');
+
+        parts = submissions;
+        break;
+      case 'TEMPLATE':
+        const template = this.props.submissionTemplateStore?.getSubmissionTemplate(id)!.parts;
+        if (typeof template === 'undefined') return message.error('Unable to find template');
+
+        parts = template;
+        break;
     }
 
     this.props.onSelect(id, type as TemplateType, _.cloneDeep(parts));
@@ -127,11 +132,17 @@ export default class SubmissionTemplateSelect extends React.Component<Props> {
   render() {
     return (
       <Form.Item label={this.props.label || ''}>
-        <Select allowClear={true} placeholder={this.getPlaceholder()} onSelect={this.handleSelect} onDeselect={this.handleDeselect} onChange={(value) => {
-          if (!value) {
-            this.handleDeselect();
-          }
-        }}>
+        <Select
+          allowClear={true}
+          placeholder={this.getPlaceholder()}
+          onSelect={this.handleSelect}
+          onDeselect={this.handleDeselect}
+          onChange={value => {
+            if (!value) {
+              this.handleDeselect();
+            }
+          }}
+        >
           {this.getOptGroups()}
         </Select>
       </Form.Item>

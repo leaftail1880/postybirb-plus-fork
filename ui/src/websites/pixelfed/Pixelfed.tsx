@@ -59,10 +59,7 @@ export class PixelfedFileSubmissionForm extends GenericFileSubmissionSection<Pix
         />
       </Form.Item>,
       <Form.Item label="Alt Text">
-        <Input
-          value={data.altText}
-          onChange={this.handleValueChange.bind(this, 'altText')}
-        />
+        <Input value={data.altText} onChange={this.handleValueChange.bind(this, 'altText')} />
       </Form.Item>,
       <Form.Item label="Post Visibility">
         <Select

@@ -58,9 +58,7 @@ export class Mastodon extends WebsiteImpl {
   );
 }
 
-class MastodonNotificationSubmissionForm extends GenericSubmissionSection<
-  MastodonNotificationOptions
-> {
+class MastodonNotificationSubmissionForm extends GenericSubmissionSection<MastodonNotificationOptions> {
   renderLeftForm(data: MastodonNotificationOptions) {
     const elements = super.renderLeftForm(data);
     elements.push(
@@ -115,10 +113,7 @@ export class MastodonFileSubmissionForm extends GenericFileSubmissionSection<Mas
         />
       </Form.Item>,
       <Form.Item label="Alt Text">
-        <Input
-          value={data.altText}
-          onChange={this.handleValueChange.bind(this, 'altText')}
-        />
+        <Input value={data.altText} onChange={this.handleValueChange.bind(this, 'altText')} />
       </Form.Item>,
       <Form.Item label="Post Visibility">
         <Select

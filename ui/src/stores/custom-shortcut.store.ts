@@ -1,8 +1,7 @@
-import socket from '../utils/websocket';
-import { observable, computed, action } from 'mobx';
-import { CustomShortcut } from 'postybirb-commons';
+import { action, computed, observable } from 'mobx';
+import { CustomShortcut, Events } from 'postybirb-commons';
 import CustomShortcutService from '../services/custom-shortcut.service';
-import { Events } from 'postybirb-commons';
+import socket from '../utils/websocket';
 
 export interface CustomShortcutState {
   shortcuts: CustomShortcut[];

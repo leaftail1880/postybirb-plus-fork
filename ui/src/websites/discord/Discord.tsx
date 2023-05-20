@@ -37,9 +37,7 @@ export class Discord extends WebsiteImpl {
   );
 }
 
-export class DiscordNotificationSubmissionForm extends GenericSubmissionSection<
-  DiscordFileOptions
-> {
+export class DiscordNotificationSubmissionForm extends GenericSubmissionSection<DiscordFileOptions> {
   renderLeftForm(data: DiscordFileOptions) {
     const elements = super.renderLeftForm(data);
     return [

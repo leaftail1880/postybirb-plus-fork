@@ -16,7 +16,7 @@ export class SettingsStore {
     maxPNGSizeCompressionWithAlpha: 25,
     maxJPEGQualityCompression: 10,
     maxJPEGSizeCompression: 30,
-    silentNotification: false,
+    silentNotification: false
   };
 
   constructor() {

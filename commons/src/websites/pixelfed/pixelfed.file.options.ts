@@ -5,8 +5,7 @@ import { PixelfedFileOptions } from '../../interfaces/websites/pixelfed/pixelfed
 import { DefaultValue } from '../../models/decorators/default-value.decorator';
 import { DefaultFileOptionsEntity } from '../../models/default-file-options.entity';
 
-export class PixelfedFileOptionsEntity extends DefaultFileOptionsEntity
-  implements PixelfedFileOptions {
+export class PixelfedFileOptionsEntity extends DefaultFileOptionsEntity implements PixelfedFileOptions {
   @Expose()
   @IsBoolean()
   @DefaultValue(false)
@@ -16,7 +15,7 @@ export class PixelfedFileOptionsEntity extends DefaultFileOptionsEntity
   @IsOptional()
   @IsString()
   spoilerText?: string;
-  
+
   @Expose()
   @IsString()
   @DefaultValue('public')
@@ -26,7 +25,6 @@ export class PixelfedFileOptionsEntity extends DefaultFileOptionsEntity
   @IsOptional()
   @IsString()
   altText?: string;
-  
 
   constructor(entity?: Partial<PixelfedFileOptions>) {
     super(entity as DefaultFileOptions);

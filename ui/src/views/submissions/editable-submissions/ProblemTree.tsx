@@ -58,7 +58,7 @@ export class ProblemTree extends React.Component<ProblemTreeProps> {
     });
     return filteredProblems;
   }
-  
+
   render() {
     const problems = this.filterEmptyTrees(this.props.problems);
     const group = _.groupBy(problems, 'website');

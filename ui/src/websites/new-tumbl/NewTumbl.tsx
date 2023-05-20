@@ -94,9 +94,7 @@ interface NewTumblSubmissionState {
   blogs: NewTumblBlog[];
 }
 
-export class NewTumblNotificationSubmissionForm extends GenericSubmissionSection<
-  NewTumblNotificationOptions
-> {
+export class NewTumblNotificationSubmissionForm extends GenericSubmissionSection<NewTumblNotificationOptions> {
   state: NewTumblSubmissionState = {
     blogs: []
   };

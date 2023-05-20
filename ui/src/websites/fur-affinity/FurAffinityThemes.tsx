@@ -4,9 +4,7 @@ const { OptGroup, Option } = Select;
 
 export const FurAffinityThemes = [
   <OptGroup label="General Things">
-    <Option value="1">
-      All
-    </Option>
+    <Option value="1">All</Option>
     <Option value="2">Abstract</Option>
     <Option value="3">Animal related (non-anthro)</Option>
     <Option value="4">Anime</Option>

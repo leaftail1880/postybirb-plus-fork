@@ -1,9 +1,4 @@
-import {
-  DefaultFileOptions,
-  DefaultOptions,
-  FileSubmission,
-  Submission
-} from 'postybirb-commons';
+import { DefaultFileOptions, DefaultOptions, FileSubmission, Submission } from 'postybirb-commons';
 import React from 'react';
 import { WebsiteSectionProps } from '../form-sections/website-form-section.interface';
 import GenericFileSubmissionSection from '../generic/GenericFileSubmissionSection';

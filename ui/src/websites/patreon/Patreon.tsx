@@ -64,9 +64,7 @@ interface PatreonSubmissionState {
   folders: Folder[];
 }
 
-export class PatreonNotificationSubmissionForm extends GenericSubmissionSection<
-  PatreonNotificationOptions
-> {
+export class PatreonNotificationSubmissionForm extends GenericSubmissionSection<PatreonNotificationOptions> {
   state: PatreonSubmissionState = {
     folders: []
   };

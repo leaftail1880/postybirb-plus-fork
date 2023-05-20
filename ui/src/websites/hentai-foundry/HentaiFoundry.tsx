@@ -49,9 +49,7 @@ export class HentaiFoundry extends WebsiteImpl {
   );
 }
 
-export class HentaiFoundryFileSubmissionForm extends GenericFileSubmissionSection<
-  HentaiFoundryFileOptions
-> {
+export class HentaiFoundryFileSubmissionForm extends GenericFileSubmissionSection<HentaiFoundryFileOptions> {
   renderRightForm(data: HentaiFoundryFileOptions) {
     const elements = super.renderRightForm(data);
     elements.push(

@@ -51,9 +51,7 @@ interface SubscribeStarSubmissionState {
   tiers: Folder[];
 }
 
-export class SubscribeStarNotificationSubmissionForm extends GenericSubmissionSection<
-  SubscribeStarNotificationOptions
-> {
+export class SubscribeStarNotificationSubmissionForm extends GenericSubmissionSection<SubscribeStarNotificationOptions> {
   state: SubscribeStarSubmissionState = {
     tiers: []
   };
@@ -109,9 +107,7 @@ export class SubscribeStarNotificationSubmissionForm extends GenericSubmissionSe
   }
 }
 
-export class SubscribeStarFileSubmissionForm extends GenericFileSubmissionSection<
-  SubscribeStarFileOptions
-> {
+export class SubscribeStarFileSubmissionForm extends GenericFileSubmissionSection<SubscribeStarFileOptions> {
   state: SubscribeStarSubmissionState = {
     tiers: []
   };

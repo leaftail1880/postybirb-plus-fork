@@ -61,9 +61,7 @@ interface TelegramSubmissionState {
   channels: Folder[];
 }
 
-class TelegramNotificationSubmissionForm extends GenericSubmissionSection<
-  TelegramNotificationOptions
-> {
+class TelegramNotificationSubmissionForm extends GenericSubmissionSection<TelegramNotificationOptions> {
   state: TelegramSubmissionState = {
     channels: []
   };

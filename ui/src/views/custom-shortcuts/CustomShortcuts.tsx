@@ -255,8 +255,9 @@ class CustomShortcutEditor extends React.Component<EditorProps, EditorState> {
                             <strong>Example:</strong>
                             <br />
                             <span> An example of a dynamic shortcut would be</span>
-                            <code>{`{${this.state.shortcut.shortcut ||
-                              'example'}:Monday through Friday}`}</code>
+                            <code>{`{${
+                              this.state.shortcut.shortcut || 'example'
+                            }:Monday through Friday}`}</code>
                             <br />
                             And if the content was: <code>I am available {'{$}'}</code>
                             <br />

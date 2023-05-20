@@ -38,9 +38,7 @@ interface TumblrSubmissionState {
   blogs: TumblrBlog[];
 }
 
-export class TumblrNotificationSubmissionForm extends GenericSubmissionSection<
-  TumblrNotificationOptions
-> {
+export class TumblrNotificationSubmissionForm extends GenericSubmissionSection<TumblrNotificationOptions> {
   state: TumblrSubmissionState = {
     blogs: []
   };

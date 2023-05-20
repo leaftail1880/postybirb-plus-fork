@@ -93,9 +93,7 @@ interface FurryNetworkSubmissionState {
   user: { characters: { id: number; name: string }[] };
 }
 
-export class FurryNetworkNotificationSubmissionForm extends GenericSubmissionSection<
-  FurryNetworkNotificationOptions
-> {
+export class FurryNetworkNotificationSubmissionForm extends GenericSubmissionSection<FurryNetworkNotificationOptions> {
   state: FurryNetworkSubmissionState = {
     collections: {},
     user: { characters: [] }
@@ -187,9 +185,7 @@ export class FurryNetworkNotificationSubmissionForm extends GenericSubmissionSec
   }
 }
 
-export class FurryNetworkFileSubmissionForm extends GenericFileSubmissionSection<
-  FurryNetworkFileOptions
-> {
+export class FurryNetworkFileSubmissionForm extends GenericFileSubmissionSection<FurryNetworkFileOptions> {
   state: FurryNetworkSubmissionState = {
     collections: {},
     user: { characters: [] }

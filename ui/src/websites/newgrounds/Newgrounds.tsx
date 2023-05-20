@@ -50,9 +50,7 @@ export class Newgrounds extends WebsiteImpl {
   );
 }
 
-export class NewgroundsFileSubmissionForm extends GenericFileSubmissionSection<
-  NewgroundsFileOptions
-> {
+export class NewgroundsFileSubmissionForm extends GenericFileSubmissionSection<NewgroundsFileOptions> {
   renderRightForm(data: NewgroundsFileOptions) {
     const elements = super.renderRightForm(data);
     elements.push(

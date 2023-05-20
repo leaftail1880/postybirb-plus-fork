@@ -21,9 +21,7 @@ export class Manebooru extends WebsiteImpl {
   );
 }
 
-export class ManebooruFileSubmissionForm extends GenericFileSubmissionSection<
-  ManebooruFileOptions
-> {
+export class ManebooruFileSubmissionForm extends GenericFileSubmissionSection<ManebooruFileOptions> {
   constructor(props: WebsiteSectionProps<FileSubmission, ManebooruFileOptions>) {
     super(props);
     this.state = {

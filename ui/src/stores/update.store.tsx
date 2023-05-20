@@ -60,7 +60,7 @@ socket.on(Events.UpdateEvent.ERROR, (err: any) => {
         </div>
         <div>{err.code}</div>
       </div>
-    ),
+    )
   });
 });
 

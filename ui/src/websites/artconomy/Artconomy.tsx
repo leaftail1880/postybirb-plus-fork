@@ -67,9 +67,7 @@ export class Artconomy extends WebsiteImpl {
   );
 }
 
-export class ArtconomyFileSubmissionForm extends GenericFileSubmissionSection<
-  ArtconomyFileOptions
-> {
+export class ArtconomyFileSubmissionForm extends GenericFileSubmissionSection<ArtconomyFileOptions> {
   renderLeftForm(data: ArtconomyFileOptions) {
     const elements = super.renderLeftForm(data);
     elements.push(

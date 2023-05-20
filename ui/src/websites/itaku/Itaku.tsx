@@ -94,9 +94,7 @@ interface ItakuFileSubmissionState {
   folders: Folder[];
 }
 
-export class ItakuNotificationSubmissionForm extends GenericSubmissionSection<
-  ItakuNotificationOptions
-> {
+export class ItakuNotificationSubmissionForm extends GenericSubmissionSection<ItakuNotificationOptions> {
   state: ItakuFileSubmissionState = {
     folders: []
   };

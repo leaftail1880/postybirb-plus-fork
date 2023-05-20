@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "declaration": true,
+    "rootDir": "./src",
     "declarationDir": "./lib",
+    "outDir": "./lib",
+    "target": "es2017",
+    "module": "commonjs",
+    "declaration": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
     "noImplicitAny": true,
-    "outDir": "./lib",
     "removeComments": true,
     "skipLibCheck": true,
-    "strict": true,
-    "target": "es2017",
-    "rootDir": "./src"
+    "strict": true
   },
   "exclude": ["node_modules", "lib"]
 }

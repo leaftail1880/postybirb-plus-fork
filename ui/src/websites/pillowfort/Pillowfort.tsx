@@ -71,9 +71,7 @@ export class Pillowfort extends WebsiteImpl {
   );
 }
 
-export class PillowfortNotificationSubmissionForm extends GenericSubmissionSection<
-  PillowfortNotificationOptions
-> {
+export class PillowfortNotificationSubmissionForm extends GenericSubmissionSection<PillowfortNotificationOptions> {
   renderLeftForm(data: PillowfortNotificationOptions) {
     const elements = super.renderLeftForm(data);
     elements.push(
@@ -117,9 +115,7 @@ export class PillowfortNotificationSubmissionForm extends GenericSubmissionSecti
   }
 }
 
-export class PillowfortFileSubmissionForm extends GenericFileSubmissionSection<
-  PillowfortFileOptions
-> {
+export class PillowfortFileSubmissionForm extends GenericFileSubmissionSection<PillowfortFileOptions> {
   renderLeftForm(data: PillowfortFileOptions) {
     const elements = super.renderLeftForm(data);
     elements.push(
