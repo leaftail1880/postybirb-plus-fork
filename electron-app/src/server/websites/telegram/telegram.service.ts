@@ -1,5 +1,5 @@
 const MTProtoClass = require('@mtproto/core');
-import { MTProto } from '@mtproto/core'
+import { MTProto } from '@mtproto/core';
 import { Injectable } from '@nestjs/common';
 import {
   DefaultOptions,
@@ -12,18 +12,20 @@ import {
   SubmissionPart,
   TelegramAccountData,
   TelegramFileOptions,
-  TelegramNotificationOptions,
+  TelegramNotificationOptions
 } from 'postybirb-commons';
 import UserAccountEntity from 'src/server/account/models/user-account.entity';
 import { PlaintextParser } from 'src/server/description-parsing/plaintext/plaintext.parser';
+import ImageManipulator from 'src/server/file-manipulation/manipulators/image.manipulator';
 import { CancellationToken } from 'src/server/submission/post/cancellation/cancellation-token';
 import {
   FilePostData,
-  PostFileRecord,
+  PostFileRecord
 } from 'src/server/submission/post/interfaces/file-post-data.interface';
 import { PostData } from 'src/server/submission/post/interfaces/post-data.interface';
 import { ValidationParts } from 'src/server/submission/validator/interfaces/validation-parts.interface';
 import FileSize from 'src/server/utils/filesize.util';
+import FormContent from 'src/server/utils/form-content.util';
 import WaitUtil from 'src/server/utils/wait.util';
 import WebsiteValidator from 'src/server/utils/website-validator.util';
 import { GenericAccountProp } from '../generic/generic-account-props.enum';
@@ -32,8 +34,6 @@ import { ScalingOptions } from '../interfaces/scaling-options.interface';
 import { Website } from '../website.base';
 import { TelegramStorage } from './telegram.storage';
 import _ = require('lodash');
-import FormContent from 'src/server/utils/form-content.util';
-import ImageManipulator from 'src/server/file-manipulation/manipulators/image.manipulator';
 
 @Injectable()
 export class Telegram extends Website {

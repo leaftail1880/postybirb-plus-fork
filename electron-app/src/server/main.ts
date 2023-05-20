@@ -1,12 +1,12 @@
+import { ClassSerializerInterceptor, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe, ClassSerializerInterceptor } from '@nestjs/common';
-import { HttpExceptionFilter } from './http-exception.filter';
-import { SSL } from './ssl';
 import * as compression from 'compression';
+import { AppModule } from './app.module';
 import { AuthGuard } from './auth.guard';
 import { CustomLogger } from './custom.logger';
 import { ensure } from './directories';
+import { HttpExceptionFilter } from './http-exception.filter';
+import { SSL } from './ssl';
 
 const logger: CustomLogger = new CustomLogger();
 
@@ -16,9 +16,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     httpsOptions: {
       key,
-      cert,
+      cert
     },
-    logger,
+    logger
   });
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalGuards(new AuthGuard());
@@ -30,7 +30,7 @@ async function bootstrap() {
 
 process.on('uncaughtException', err => logger.error(err.message, err.stack, 'Uncaught Exception'));
 process.on('unhandledRejection', (err: any) =>
-  logger.error(err.message, err.stack, 'Unhandled Rejection'),
+  logger.error(err.message, err.stack, 'Unhandled Rejection')
 );
 
 module.exports = bootstrap;

@@ -1,8 +1,4 @@
 {
-  "typescript.tsdk": "./commons/node_modules/typescript/lib/",
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
   "editor.quickSuggestions": {
     "strings": true
   }

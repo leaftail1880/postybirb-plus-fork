@@ -1,19 +1,10 @@
 /* tslint:disable: no-console no-var-requires */
 const path = require('path');
-import {
-  app,
-  BrowserWindow,
-  Menu,
-  nativeImage,
-  nativeTheme,
-  Tray,
-  Notification,
-  webContents,
-} from 'electron';
+import { enable as enableRemote, initialize as initializeRemote } from '@electron/remote/main';
+import { BrowserWindow, Menu, Notification, Tray, app, nativeImage, nativeTheme } from 'electron';
 import * as WindowStateKeeper from 'electron-window-state';
 import { enableSleep } from './app/power-save';
 import * as util from './app/utils';
-import { initialize as initializeRemote, enable as enableRemote } from '@electron/remote/main';
 
 initializeRemote();
 
@@ -46,7 +37,7 @@ require('./app/crash-handler');
 require('./app/auth-generator');
 require('./app/settings');
 require('electron-context-menu')({
-  showInspectElement: false,
+  showInspectElement: false
 });
 
 let nest: any;
@@ -81,7 +72,7 @@ app.on(
     url: string,
     error: string,
     certificate: Electron.Certificate,
-    callback: (allow: boolean) => void,
+    callback: (allow: boolean) => void
   ) => {
     if (
       certificate.issuerName === 'postybirb.com' &&
@@ -92,12 +83,12 @@ app.on(
     } else {
       callback(false);
     }
-  },
+  }
 );
 app.on('quit', () => {
   enableSleep();
   clearTimeout(backgroundAlertTimeout);
-  global.CHILD_PROCESS_IDS.forEach((id) => process.kill(id));
+  global.CHILD_PROCESS_IDS.forEach(id => process.kill(id));
 });
 
 async function initialize() {
@@ -132,7 +123,7 @@ function createWindow() {
   if (!mainWindowState) {
     mainWindowState = WindowStateKeeper({
       defaultWidth: 992,
-      defaultHeight: 800,
+      defaultHeight: 800
     });
   }
 
@@ -154,8 +145,8 @@ function createWindow() {
       webviewTag: true,
       contextIsolation: false,
       spellcheck: true,
-      backgroundThrottling: false,
-    },
+      backgroundThrottling: false
+    }
   });
 
   enableRemote(mainWindow.webContents);
@@ -167,7 +158,9 @@ function createWindow() {
     mainWindowState.manage(mainWindow);
   }
 
-  mainWindow.webContents.on('new-window', (event) => event.preventDefault());
+  mainWindow.webContents.setWindowOpenHandler(details => {
+    return { action: 'deny' };
+  });
   mainWindow.on('closed', () => {
     mainWindow = null;
     if (global.tray && util.isWindows()) {
@@ -179,7 +172,7 @@ function createWindow() {
             title: 'PostyBirb',
             icon,
             body: 'PostyBirb will continue in the background.',
-            silent: true,
+            silent: true
           });
           notification.show();
         }, 750);
