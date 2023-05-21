@@ -180,7 +180,7 @@ function createWindow() {
     }
   });
 
-  mainWindow.loadFile(path.join(__dirname, '../build/index.html')).then(() => {
+  mainWindow.loadFile(path.join(__dirname, '../front/index.html')).then(() => {
     loader.hide();
     mainWindow.show();
     if (global.DEBUG_MODE) {

@@ -12,7 +12,7 @@ import {
   SubmissionPart,
   TelegramAccountData,
   TelegramFileOptions,
-  TelegramNotificationOptions
+  TelegramNotificationOptions,
 } from 'postybirb-commons';
 import UserAccountEntity from 'src/server/account/models/user-account.entity';
 import { PlaintextParser } from 'src/server/description-parsing/plaintext/plaintext.parser';
@@ -20,7 +20,7 @@ import ImageManipulator from 'src/server/file-manipulation/manipulators/image.ma
 import { CancellationToken } from 'src/server/submission/post/cancellation/cancellation-token';
 import {
   FilePostData,
-  PostFileRecord
+  PostFileRecord,
 } from 'src/server/submission/post/interfaces/file-post-data.interface';
 import { PostData } from 'src/server/submission/post/interfaces/post-data.interface';
 import { ValidationParts } from 'src/server/submission/validator/interfaces/validation-parts.interface';
@@ -180,7 +180,7 @@ export class Telegram extends Website {
           api_id: Number(appId),
           api_hash: appHash,
           storageOptions: {
-            instance: new TelegramStorage(appId)
+            instance: new TelegramStorage(appId),
           },
         });
 
@@ -200,9 +200,9 @@ export class Telegram extends Website {
     const { chats } = await this.callApi<{
       chats: { access_hash: string; title: string; id: number; _: string }[];
     }>(appId, 'messages.getDialogs', {
-        offset_peer: {
-          _: 'inputPeerEmpty'
-      }      
+      offset_peer: {
+        _: 'inputPeerEmpty',
+      },
     });
 
     const channels: Folder[] = chats

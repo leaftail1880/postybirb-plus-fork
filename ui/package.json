@@ -34,16 +34,13 @@
     "typescript": "^4.9.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "npm run build:clean && npm run build:style && prettier -w ./src/ && react-scripts build && shx mv build ../electron-app",
-    "build:clean": "rimraf ../electron-app/build",
-    "build:style": "npm run build:tailwind && npm run build:themes",
+    "build": "npm run build:clean && npm run build:styles && npm run build:compile",
+    "build:clean": "rimraf ../electron-app/front front",
+    "build:styles": "npm run build:tailwind && npm run build:themes",
     "build:tailwind": "tailwind build -i src/styles/index.css -o public/styles/tailwind.css && npm run build:antd-tweaks",
     "build:antd-tweaks": "tailwind build -i src/styles/antd-dark-tweaks.css -o public/styles/dark-tweaks.css && tailwind build -i src/styles/antd-light-tweaks.css -o public/styles/light-tweaks.css && tailwind build -i src/styles/antd-base-tweaks.css -o public/styles/antd-tweaks.css",
     "build:themes": "lessc --js ./src/themes/light.less ./public/styles/light.css && lessc --js ./src/themes/dark.less ./public/styles/dark.css",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tailwind": "tailwind"
+    "build:compile": "prettier -w ./src/ && react-scripts build && shx mv front ../electron-app"
   },
   "homepage": "./",
   "browserslist": {

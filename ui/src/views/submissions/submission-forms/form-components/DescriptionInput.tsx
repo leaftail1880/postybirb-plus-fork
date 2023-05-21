@@ -158,12 +158,31 @@ export default class DescriptionInput extends React.Component<Props, State> {
                     <div>Helpful shortcuts that are built into the description parser:</div>
                     <ul>
                       <li>
-                        <code>{'{default}'}</code>
+                        <code>{'{description}'}</code>
                         <span className="mx-1">-</span>
                         <span>
                           Inserts the default description text at the location of this tag.
                           <br />
                           Best used when overriding the default description for specific websites.
+                        </span>
+                      </li>
+                      <li>
+                        <code>{'{title}'}</code>
+                        <span className="mx-1">-</span>
+                        <span>
+                          Inserts the default title text at the location of this tag.
+                          <br />
+                          Best used when overriding the default title for specific websites.
+                        </span>
+                      </li>
+                      <li>
+                        <code>{'{tags}'}</code>
+                        <span className="mx-1">-</span>
+                        <span>
+                          Inserts the default tags text at the location of this tag separated by
+                          space.
+                          <br />
+                          Best used when overriding the default tags for specific websites.
                         </span>
                       </li>
                     </ul>
