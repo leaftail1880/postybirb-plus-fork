@@ -1,5 +1,5 @@
 import React from 'react';
-import * as sanitize from 'sanitize-html';
+import sanitize from 'sanitize-html';
 import { uiStore } from '../../../../stores/ui.store';
 import SubmissionService from '../../../../services/submission.service';
 import { FileSubmission } from 'postybirb-commons';
@@ -41,11 +41,10 @@ export default class FallbackStoryInput extends React.Component<Props, State> {
       'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6',
     content_style: 'p {margin: 0}',
     height: '100%',
-    plugins: 'preview paste hr help code',
+    plugins: 'preview help code',
     menubar: 'file edit insert view tools help',
     toolbar:
       'newdocument undo redo | formatselect removeformat | hr | bold italic underline strikethrough forecolor | alignleft aligncenter alignright | code help',
-    templates: [],
     formats: {
       underline: { inline: 'u', exact: true },
       strikethrough: { inline: 's', exact: true }
