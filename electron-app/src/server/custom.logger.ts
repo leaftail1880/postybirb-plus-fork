@@ -14,23 +14,23 @@ export class CustomLogger extends ConsoleLogger {
         maxFiles: 15,
         dirname: path.join(app.getPath('userData'), 'logs'),
         auditFile: path.join(app.getPath('userData'), 'logs', 'log-audit.json'),
-        format: winston.format.combine(winston.format.timestamp(), winston.format.json())
-      })
+        format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
+      }),
     ],
-    exitOnError: false
+    exitOnError: false,
   });
 
   error(message: any, trace?: string, context?: string) {
     if (message instanceof Error) {
       super.error(message.message, message.stack, context);
       CustomLogger.logger.error(
-        `[${context || this.context}] ${message.message} ${trace || message.stack}`
+        `[${context || this.context}] ${message.message} ${trace || message.stack}`,
       );
     } else {
       super.error(message, trace, context);
       if (typeof message === 'object') {
         CustomLogger.logger.error(
-          `[${context || this.context}] ${JSON.stringify(message)} ${trace}`
+          `[${context || this.context}] ${JSON.stringify(message)} ${trace}`,
         );
       } else {
         CustomLogger.logger.error(`[${context || this.context}] ${message} ${trace}`);
@@ -44,7 +44,7 @@ export class CustomLogger extends ConsoleLogger {
       CustomLogger.logger.info(
         `[${context || this.context}] ${
           typeof message === 'object' ? JSON.stringify(message, null, 1) : message
-        }`
+        }`,
       );
     } else if (
       !message.match(/(Mapped|Module)/) &&

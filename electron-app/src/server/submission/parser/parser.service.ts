@@ -140,7 +140,12 @@ export class ParserService {
   ): Promise<void> {
     const options: DefaultFileOptions = data.options as DefaultFileOptions;
     const canScale = options.autoScale;
-    data.primary = await this.attemptFileScale(websitePart.accountId, website, submission.primary, canScale);
+    data.primary = await this.attemptFileScale(
+      websitePart.accountId,
+      website,
+      submission.primary,
+      canScale,
+    );
 
     if (submission.thumbnail && options.useThumbnail) {
       data.thumbnail = this.fileRecordAsPostFileRecord(submission.thumbnail).file;
@@ -162,7 +167,9 @@ export class ParserService {
       );
 
       data.additional = await Promise.all(
-        additionalFiles.map((file) => this.attemptFileScale(websitePart.accountId, website, file, canScale)),
+        additionalFiles.map((file) =>
+          this.attemptFileScale(websitePart.accountId, website, file, canScale),
+        ),
       );
     } else {
       data.additional = [];

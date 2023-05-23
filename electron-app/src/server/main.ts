@@ -16,9 +16,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     httpsOptions: {
       key,
-      cert
+      cert,
     },
-    logger
+    logger,
   });
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalGuards(new AuthGuard());
@@ -28,9 +28,11 @@ async function bootstrap() {
   await app.listen(process.env.PORT);
 }
 
-process.on('uncaughtException', err => logger.error(err.message, err.stack, 'Uncaught Exception'));
+process.on('uncaughtException', (err) =>
+  logger.error(err.message, err.stack, 'Uncaught Exception'),
+);
 process.on('unhandledRejection', (err: any) =>
-  logger.error(err.message, err.stack, 'Unhandled Rejection')
+  logger.error(err.message, err.stack, 'Unhandled Rejection'),
 );
 
 module.exports = bootstrap;

@@ -113,8 +113,8 @@ export class Pillowfort extends Website {
 
     const uploads = await Promise.all(
       [data.primary, ...data.additional]
-        .map(f => f.file)
-        .map(f => this.uploadImage(f, data.part.accountId, form.authenticity_token)),
+        .map((f) => f.file)
+        .map((f) => this.uploadImage(f, data.part.accountId, form.authenticity_token)),
     );
 
     this.checkCancelled(cancellationToken);

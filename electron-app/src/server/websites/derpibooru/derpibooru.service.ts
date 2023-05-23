@@ -8,7 +8,7 @@ import {
   PostResponse,
   SubmissionPart,
   SubmissionRating,
-  UsernameShortcut
+  UsernameShortcut,
 } from 'postybirb-commons';
 import UserAccountEntity from 'src/server//account/models/user-account.entity';
 import { MarkdownParser } from 'src/server/description-parsing/markdown/markdown.parser';
@@ -158,7 +158,7 @@ export class Derpibooru extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 100;
+    const maxMB: number = 100;
 
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (

@@ -28,7 +28,7 @@ export class TagConverterService {
 
   async getTagConvertersForWebsite(website: string) {
     const converters = await this.getAll();
-    return converters.filter(converter => converter.hasConversion(website));
+    return converters.filter((converter) => converter.hasConversion(website));
   }
 
   async create(customShortcutDto: TagConverterEntity) {

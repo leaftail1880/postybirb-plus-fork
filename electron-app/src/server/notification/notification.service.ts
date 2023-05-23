@@ -54,11 +54,11 @@ export class NotificationService {
   }
 
   async markAsViewed(ids: string[]) {
-    const notifications = await Promise.all(ids.map(id => this.repository.findOne(id)));
+    const notifications = await Promise.all(ids.map((id) => this.repository.findOne(id)));
     await Promise.all(
       notifications
-        .filter(notification => notification)
-        .map(notification => {
+        .filter((notification) => notification)
+        .map((notification) => {
           notification.viewed = true;
           return this.repository.update(notification);
         }),

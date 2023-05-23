@@ -128,8 +128,8 @@ export class Aryion extends Website {
       thumb: data.thumbnail,
       desc: data.description,
       tags: this.formatTags(data.tags)
-        .filter(f => !f.match(/^vore$/i))
-        .filter(f => !f.match(/^non-vore$/i))
+        .filter((f) => !f.match(/^vore$/i))
+        .filter((f) => !f.match(/^non-vore$/i))
         .join('\n'),
       'reqtag[]': data.options.requiredTag === '1' ? 'Non-Vore' : '',
       view_perm: data.options.viewPermissions,
@@ -186,16 +186,12 @@ export class Aryion extends Website {
 
     if (!WebsiteValidator.supportsFileType(submission.primary, this.acceptsFiles)) {
       if (submission.primary.type === FileSubmissionType.TEXT && !submission.fallback) {
-        problems.push(
-          `Currently supported file formats: ${this.acceptsFiles.join(', ')}`,
-        );
+        problems.push(`Currently supported file formats: ${this.acceptsFiles.join(', ')}`);
         problems.push('A fallback file is required.');
       } else if (submission.primary.type === FileSubmissionType.TEXT && submission.fallback) {
         warnings.push('The fallback text will be used.');
       } else {
-        problems.push(
-          `Currently supported file formats: ${this.acceptsFiles.join(', ')}`,
-        );
+        problems.push(`Currently supported file formats: ${this.acceptsFiles.join(', ')}`);
       }
     }
 

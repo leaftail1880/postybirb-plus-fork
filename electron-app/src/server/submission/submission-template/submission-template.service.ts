@@ -104,7 +104,7 @@ export class SubmissionTemplateService {
   async removePartsForAccount(accountId: string): Promise<void> {
     this.logger.log(accountId, 'Delete Submission Template Parts For Account');
     const all = await this.getAll();
-    all.forEach(async template => {
+    all.forEach(async (template) => {
       if (template.parts[accountId]) {
         if (template.parts[accountId]) {
           delete template.parts[accountId];

@@ -199,7 +199,7 @@ export class Artconomy extends Website {
     };
 
     this.checkCancelled(cancellationToken);
-    const postResponse = await Http.post<{id: number}>(
+    const postResponse = await Http.post<{ id: number }>(
       `${this.BASE_URL}/api/profiles/account/${username}/journals/`,
       data.part.accountId,
       {
@@ -208,11 +208,13 @@ export class Artconomy extends Website {
       },
     );
     this.verifyResponse(postResponse);
-    return this.createPostResponse({ source: `${this.BASE_URL}/profile/${username}/journals/${postResponse.body.id}` });
+    return this.createPostResponse({
+      source: `${this.BASE_URL}/profile/${username}/journals/${postResponse.body.id}`,
+    });
   }
 
   parseTags(tags: string[]) {
-    return tags.map(tag => {
+    return tags.map((tag) => {
       return tag.trim().replace(/\s/gm, '_');
     });
   }
@@ -229,12 +231,12 @@ export class Artconomy extends Website {
     const files = [
       submission.primary,
       ...(submission.additional || []).filter(
-        f => !f.ignoredAccounts!.includes(submissionPart.accountId),
+        (f) => !f.ignoredAccounts!.includes(submissionPart.accountId),
       ),
     ];
 
     const maxMB: number = 99;
-    files.forEach(file => {
+    files.forEach((file) => {
       const { type, size, name, mimetype } = file;
       if (!WebsiteValidator.supportsFileType(file, this.acceptsFiles)) {
         problems.push(`Does not support file format: (${name}) ${mimetype}.`);

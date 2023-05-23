@@ -1,26 +1,24 @@
-import React from 'react';
-import AppLayout from './views/app-layout/AppLayout';
-import { HashRouter as Router } from 'react-router-dom';
 import { Modal } from 'antd';
 import { Provider } from 'mobx-react';
+import React from 'react';
+import { configure } from 'react-hotkeys';
+import { HashRouter as Router } from 'react-router-dom';
+import { customShortcutStore } from './stores/custom-shortcut.store';
 import { descriptionTemplateStore } from './stores/description-template.store';
 import { headerStore } from './stores/header.store';
 import { loginStatusStore } from './stores/login-status.store';
+import { notificationStore } from './stores/notification.store';
+import { postStatusStore } from './stores/post-status.store';
 import { settingsStore } from './stores/settings.store';
-import { submissionStore } from './stores/submission.store';
 import { submissionTemplateStore } from './stores/submission-template.store';
+import { submissionStore } from './stores/submission.store';
+import { tagConverterStore } from './stores/tag-converter.store';
 import { tagGroupStore } from './stores/tag-group.store';
 import { uiStore } from './stores/ui.store';
 import { updateStore } from './stores/update.store';
-import { postStatusStore } from './stores/post-status.store';
-import { notificationStore } from './stores/notification.store';
-import { customShortcutStore } from './stores/custom-shortcut.store';
-import { tagConverterStore } from './stores/tag-converter.store';
-import { configure } from 'react-hotkeys';
+import AppLayout from './views/app-layout/AppLayout';
 
-configure({
-  ignoreTags: ['textarea']
-});
+configure({ ignoreTags: ['textarea'] });
 
 interface State {
   confirmationMessage?: string;
@@ -70,7 +68,7 @@ export default class App extends React.Component {
           tagConverterStore={tagConverterStore}
         >
           <Modal
-            visible={this.state.showConfirmation}
+            open={this.state.showConfirmation}
             onCancel={this.chooseConfirmation.bind(this, false)}
             onOk={this.chooseConfirmation.bind(this, true)}
           >

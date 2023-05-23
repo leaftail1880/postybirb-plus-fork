@@ -146,7 +146,7 @@ export class KoFi extends Website {
       },
     );
 
-    let json = post.body || { success: false };
+    const json = post.body || { success: false };
     if (!json.success) {
       return Promise.reject(
         this.createPostResponse({

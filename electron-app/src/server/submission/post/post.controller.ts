@@ -20,7 +20,7 @@ export class PostController {
   @Post('queue/:id')
   async queue(@Param('id') id: string) {
     const validatedSubmission = await this.submissionService.getAndValidate(id);
-    if (!!_.flatMap(validatedSubmission.problems, p => p.problems).length) {
+    if (!!_.flatMap(validatedSubmission.problems, (p) => p.problems).length) {
       throw new BadRequestException('Cannot queue submission with problems');
     }
 

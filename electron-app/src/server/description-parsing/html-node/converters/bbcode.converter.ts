@@ -17,7 +17,7 @@ export class BBCodeConverter {
       case TagType.STANDARD:
         const bbcodeNode = new BBCodeNodeConverter(node, options);
         return `${bbcodeNode.startTag}${node.children
-          .map(child => ({
+          .map((child) => ({
             child,
             text: BBCodeConverter.convert(child, options),
           }))

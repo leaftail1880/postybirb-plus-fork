@@ -329,7 +329,7 @@ export class Newgrounds extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 40;
+    const maxMB: number = 40;
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (
         isAutoscaling &&

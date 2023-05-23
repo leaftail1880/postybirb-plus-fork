@@ -23,7 +23,7 @@ export class FileManipulationService {
       convertToJPEG?: boolean;
     },
   ): Promise<{ buffer: Buffer; mimetype: string }> {
-    let targetSize = scalingOptions.maxSize; // Assumed to be bytes
+    const targetSize = scalingOptions.maxSize; // Assumed to be bytes
     let newBuffer: Buffer = buffer;
     let newMimeType: string = mimeType;
 
@@ -35,28 +35,27 @@ export class FileManipulationService {
 
       try {
         let skipRescale = false;
-        // Is the file above the pixel dimension limits, if set ? 
+        // Is the file above the pixel dimension limits, if set ?
         if (scalingOptions.maxHeight || scalingOptions.maxWidth) {
           let maxSize = 0;
           if (scalingOptions.maxWidth) {
             maxSize = scalingOptions.maxWidth;
           }
           if (scalingOptions.maxHeight && scalingOptions.maxHeight < maxSize) {
-              maxSize = scalingOptions.maxHeight;
+            maxSize = scalingOptions.maxHeight;
           }
 
           if (maxSize < im.getHeight() || maxSize < im.getWidth()) {
             const scaled = await im.resize(maxSize).getData();
             newBuffer = scaled.buffer;
-            const newIm = await this.imageManipulationPool.getImageManipulator(
-              newBuffer,
-              mimeType,
-            ); 
-            newIm.destroy();    
+            const newIm = await this.imageManipulationPool.getImageManipulator(newBuffer, mimeType);
+            newIm.destroy();
 
             if (newBuffer.length > targetSize) {
-              this.logger.debug(`newBuffer still in excess of the target size; will need to rescale by size not px`)
-            } else { 
+              this.logger.debug(
+                `newBuffer still in excess of the target size; will need to rescale by size not px`,
+              );
+            } else {
               skipRescale = true;
             }
           }
@@ -66,7 +65,6 @@ export class FileManipulationService {
         if (!skipRescale) {
           const originalFileSize = buffer.length;
           if (originalFileSize > targetSize) {
-
             if (settings.convertToJPEG) {
               im.toJPEG();
             }
@@ -91,8 +89,7 @@ export class FileManipulationService {
             }
           }
         }
-      }
-      finally {
+      } finally {
         im.destroy();
       }
     }
@@ -133,7 +130,7 @@ export class FileManipulationService {
     }
 
     const scaleSize = originalSize / targetSize > 1.5 ? 20 : 10; // try to optimize # of runs for way larger files
-    const scaleSteps = this.getSteps(reductionValue, scaleSize).map(step => 1 - step / 100);
+    const scaleSteps = this.getSteps(reductionValue, scaleSize).map((step) => 1 - step / 100);
 
     const lastStep = scaleSteps.pop();
     const lastScaled = await im.scale(lastStep).getData(); // check end first to see if we should calculate anything between
@@ -164,7 +161,7 @@ export class FileManipulationService {
     im.toJPEG().setQuality(100);
 
     const scaleSize = originalSize / targetSize > 2 ? 20 : 10; // try to optimize # of runs for way larger files
-    const scaleSteps = this.getSteps(maxSizeReduction, scaleSize).map(step => 1 - step / 100);
+    const scaleSteps = this.getSteps(maxSizeReduction, scaleSize).map((step) => 1 - step / 100);
 
     const lastStep = scaleSteps[scaleSteps.length - 1];
     const lastScaled = await im.scale(lastStep).getData(); // check end first to see if we should calculate anything between
@@ -196,7 +193,7 @@ export class FileManipulationService {
 
     const qualitySteps = [
       99,
-      ...this.getSteps(maxQualityReduction, 2).map(step => (1 - step / 100) * 100),
+      ...this.getSteps(maxQualityReduction, 2).map((step) => (1 - step / 100) * 100),
     ];
     // Attempt combo of quality + size (which is probably pretty slow)
     for (const scale of scaleSteps) {

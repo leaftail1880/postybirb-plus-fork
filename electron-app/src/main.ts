@@ -1,4 +1,3 @@
-/* tslint:disable: no-console no-var-requires */
 const path = require('path');
 import { enable as enableRemote, initialize as initializeRemote } from '@electron/remote/main';
 import { BrowserWindow, Menu, Notification, Tray, app, nativeImage, nativeTheme } from 'electron';
@@ -37,7 +36,7 @@ require('./app/crash-handler');
 require('./app/auth-generator');
 require('./app/settings');
 require('electron-context-menu')({
-  showInspectElement: false
+  showInspectElement: false,
 });
 
 let nest: any;
@@ -46,7 +45,7 @@ let mainWindowState: WindowStateKeeper.State = null;
 let mainWindow: BrowserWindow = null;
 let backgroundAlertTimeout = null;
 let hasNotifiedAboutBackground = false;
-const icon: string = path.join(__dirname, '../build/assets/icons/minnowicon.png');
+const icon: string = path.join(__dirname, '../front/assets/icons/minnowicon.png');
 
 // Enable windows 10 notifications
 if (util.isWindows()) {
@@ -64,31 +63,21 @@ app.on('ready', () => {
   nest = require('./server/main');
   initialize();
 });
-app.on(
-  'certificate-error',
-  (
-    event: Electron.Event,
-    webContents: Electron.WebContents,
-    url: string,
-    error: string,
-    certificate: Electron.Certificate,
-    callback: (allow: boolean) => void
-  ) => {
-    if (
-      certificate.issuerName === 'postybirb.com' &&
-      certificate.subject.organizations[0] === 'PostyBirb' &&
-      certificate.issuer.country === 'US'
-    ) {
-      callback(true);
-    } else {
-      callback(false);
-    }
+app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+  if (
+    certificate.issuerName === 'postybirb.com' &&
+    certificate.subject.organizations[0] === 'PostyBirb' &&
+    certificate.issuer.country === 'US'
+  ) {
+    callback(true);
+  } else {
+    callback(false);
   }
-);
+});
 app.on('quit', () => {
   enableSleep();
   clearTimeout(backgroundAlertTimeout);
-  global.CHILD_PROCESS_IDS.forEach(id => process.kill(id));
+  global.CHILD_PROCESS_IDS.forEach((id) => process.kill(id));
 });
 
 async function initialize() {
@@ -123,7 +112,7 @@ function createWindow() {
   if (!mainWindowState) {
     mainWindowState = WindowStateKeeper({
       defaultWidth: 992,
-      defaultHeight: 800
+      defaultHeight: 800,
     });
   }
 
@@ -133,6 +122,7 @@ function createWindow() {
     height: mainWindowState.height,
     minWidth: 500,
     minHeight: 500,
+    // titleBarStyle: 'hidden',
     autoHideMenuBar: true,
     icon,
     title: 'PostyBirb',
@@ -140,13 +130,14 @@ function createWindow() {
     webPreferences: {
       devTools: true,
       allowRunningInsecureContent: false,
-      nodeIntegration: false,
+      nodeIntegration: true,
       preload: path.join(__dirname, 'app', 'preload.js'),
       webviewTag: true,
-      contextIsolation: false,
+      contextIsolation: true,
+
       spellcheck: true,
-      backgroundThrottling: false
-    }
+      backgroundThrottling: false,
+    },
   });
 
   enableRemote(mainWindow.webContents);
@@ -154,11 +145,12 @@ function createWindow() {
   (mainWindow as any).AUTH_ID = global.AUTH_ID;
   (mainWindow as any).AUTH_SERVER_URL = global.AUTH_SERVER_URL;
   (mainWindow as any).IS_DARK_THEME = nativeTheme.shouldUseDarkColors;
+  (mainWindow as any).NODE_ENV = process.env.NODE_ENV;
   if (!global.DEBUG_MODE) {
     mainWindowState.manage(mainWindow);
   }
 
-  mainWindow.webContents.setWindowOpenHandler(details => {
+  mainWindow.webContents.setWindowOpenHandler(() => {
     return { action: 'deny' };
   });
   mainWindow.on('closed', () => {
@@ -172,7 +164,7 @@ function createWindow() {
             title: 'PostyBirb',
             icon,
             body: 'PostyBirb will continue in the background.',
-            silent: true
+            silent: true,
           });
           notification.show();
         }, 750);

@@ -243,7 +243,7 @@ export class SoFurry extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 50;
+    const maxMB: number = 50;
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (
         isAutoscaling &&

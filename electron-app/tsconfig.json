@@ -11,7 +11,10 @@
     "baseUrl": "./",
     "incremental": true,
     "rootDir": "./src",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "postybirb-commons": ["../commons", "../commons/src/index"]
+    }
   },
   "exclude": ["node_modules", "back", "test"]
 }

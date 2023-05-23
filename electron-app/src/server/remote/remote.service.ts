@@ -11,7 +11,7 @@ export class RemoteService {
     const accountSession = session.fromPartition(`persist:${accountId}`);
     await accountSession.clearStorageData();
     await Promise.all(
-      cookies.map(cookie => {
+      cookies.map((cookie) => {
         return accountSession.cookies.set(CookieConverter.convertCookie(cookie));
       }),
     );

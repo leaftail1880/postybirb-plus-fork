@@ -1,14 +1,14 @@
-import React from 'react';
-import * as sanitize from 'sanitize-html';
-import { inject, observer } from 'mobx-react';
 import { Editor } from '@tinymce/tinymce-react';
-import { Form, Switch, Button, Popover, Typography } from 'antd';
-import { DescriptionTemplateStore } from '../../../../stores/description-template.store';
+import { Button, Form, Popover, Switch, Typography } from 'antd';
+import { inject, observer } from 'mobx-react';
 import { DescriptionData } from 'postybirb-commons';
+import React from 'react';
+import sanitize from 'sanitize-html';
 import WebsiteService from '../../../../services/website.service';
-import { WebsiteRegistry } from '../../../../websites/website-registry';
-import { uiStore } from '../../../../stores/ui.store';
 import { CustomShortcutStore } from '../../../../stores/custom-shortcut.store';
+import { DescriptionTemplateStore } from '../../../../stores/description-template.store';
+import { uiStore } from '../../../../stores/ui.store';
+import { WebsiteRegistry } from '../../../../websites/website-registry';
 
 interface Props {
   customShortcutStore?: CustomShortcutStore;
@@ -43,17 +43,15 @@ export default class DescriptionInput extends React.Component<Props, State> {
     paste_data_images: false,
     browser_spellcheck: true, // should be supported in electron 8
     entity_encoding: 'raw',
-    paste_retain_style_properties: 'color',
     invalid_elements: 'img,audio,video',
     block_formats:
       'Paragraph=p;Header 1=h1;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6',
     content_style: 'p {margin: 0}',
     height: 200,
-    plugins: 'autoresize autolink link preview paste hr template help code lists',
+    plugins: 'autoresize autolink link preview help code lists',
     menubar: 'file edit insert view tools help',
     toolbar:
       'newdocument undo redo | formatselect removeformat | link unlink hr | bold italic underline strikethrough forecolor | alignleft aligncenter alignright | bullist | code template help',
-    templates: [],
     formats: {
       underline: { inline: 'u', exact: true },
       strikethrough: { inline: 's', exact: true }

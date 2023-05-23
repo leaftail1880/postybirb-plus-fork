@@ -101,10 +101,10 @@ export class PostService {
   cancel(submission: Submission) {
     if (this.isCurrentlyPosting(submission)) {
       // Need to handle cancel event
-      this.getPosters(submission.type).forEach(poster => poster.cancel());
+      this.getPosters(submission.type).forEach((poster) => poster.cancel());
     } else if (this.isCurrentlyQueued(submission)) {
       this.submissionQueue[submission.type].splice(
-        this.submissionQueue[submission.type].findIndex(s => s._id === submission._id),
+        this.submissionQueue[submission.type].findIndex((s) => s._id === submission._id),
         1,
       );
     } else {
@@ -121,11 +121,11 @@ export class PostService {
   }
 
   isCurrentlyPostingToAny(): boolean {
-    return !!Object.values(this.posting).filter(post => !!post).length;
+    return !!Object.values(this.posting).filter((post) => !!post).length;
   }
 
   isCurrentlyQueued(submission: Submission): boolean {
-    return !!this.submissionQueue[submission.type].find(s => s._id === submission._id);
+    return !!this.submissionQueue[submission.type].find((s) => s._id === submission._id);
   }
 
   hasQueued(type: SubmissionType): boolean {
@@ -133,16 +133,16 @@ export class PostService {
   }
 
   hasAnyQueued(): boolean {
-    return !!Object.values(this.submissionQueue).filter(q => q.length).length;
+    return !!Object.values(this.submissionQueue).filter((q) => q.length).length;
   }
 
   getPostingStatus(): PostStatuses {
     const posting: PostInfo[] = [];
-    Object.values(this.posting).forEach(submission => {
+    Object.values(this.posting).forEach((submission) => {
       if (submission) {
         posting.push({
           submission,
-          statuses: this.getPosters(submission.type).map(poster => ({
+          statuses: this.getPosters(submission.type).map((poster) => ({
             postAt: poster.postAt,
             status: poster.status,
             waitingForCondition: poster.waitForExternalStart,
@@ -181,7 +181,7 @@ export class PostService {
 
     // Check for problems
     const validationPackage = await this.submissionService.validate(submission);
-    const isValid: boolean = !_.flatMap(validationPackage.problems, p => p.problems).length;
+    const isValid: boolean = !_.flatMap(validationPackage.problems, (p) => p.problems).length;
 
     if (isValid) {
       if (submission.schedule.isScheduled) {
@@ -190,7 +190,7 @@ export class PostService {
       this.notifyPostingStateChanged();
       this.notifyPostingStatusChanged();
       const parts = await this.partService.getPartsForSubmission(submission._id, false);
-      const [defaultPart] = parts.filter(p => p.isDefault);
+      const [defaultPart] = parts.filter((p) => p.isDefault);
 
       // Preload files if they exist
       const postingSubmission = submission.copy();
@@ -199,25 +199,25 @@ export class PostService {
       }
 
       // Create posters
-      const existingSources = parts.filter(p => p.postedTo);
+      const existingSources = parts.filter((p) => p.postedTo);
       this.postingParts[postingSubmission.type] = parts
-        .filter(p => !p.isDefault)
-        .filter(p => p.postStatus !== 'SUCCESS')
-        .map(p =>
+        .filter((p) => !p.isDefault)
+        .filter((p) => p.postStatus !== 'SUCCESS')
+        .map((p) =>
           this.createPoster(
             postingSubmission,
             p,
             defaultPart,
-            existingSources.filter(op => p.website !== op.website).map(op => op.postedTo), // do not have duplicate postTos
+            existingSources.filter((op) => p.website !== op.website).map((op) => op.postedTo), // do not have duplicate postTos
           ),
         );
 
       // Listen to events
-      this.getPosters(postingSubmission.type).forEach(poster => {
+      this.getPosters(postingSubmission.type).forEach((poster) => {
         poster.once('ready', () => this.notifyPostingStatusChanged());
         poster.once('posting', () => this.notifyPostingStatusChanged());
-        poster.once('cancelled', data => this.checkForCompletion(submission));
-        poster.once('done', data => {
+        poster.once('cancelled', (data) => this.checkForCompletion(submission));
+        poster.once('done', (data) => {
           if (data.source) {
             this.addSource(submission.type, data.source);
           }
@@ -255,7 +255,7 @@ export class PostService {
   }
 
   private addSource(type: SubmissionType, source: string) {
-    this.postingParts[type].forEach(poster => {
+    this.postingParts[type].forEach((poster) => {
       poster.addSource(source);
       // Start poster that was waiting for a source
       // if (poster.waitForExternalStart) {
@@ -267,21 +267,21 @@ export class PostService {
   private checkForCompletion(submission: SubmissionEntity) {
     // isDone is set when 'done' is called and 'cancelled'
     const posters = this.getPosters(submission.type);
-    const incomplete = posters.filter(poster => !poster.isDone);
+    const incomplete = posters.filter((poster) => !poster.isDone);
     if (incomplete.length) {
-      const waitingForExternal = incomplete.filter(poster => poster.waitForExternalStart);
+      const waitingForExternal = incomplete.filter((poster) => poster.waitForExternalStart);
 
       if (waitingForExternal.length === incomplete.length) {
         // Start posts that were awaiting external sources, even if they haven't gotten a source.
-        waitingForExternal.forEach(poster => poster.doPost());
+        waitingForExternal.forEach((poster) => poster.doPost());
       }
     } else {
       this.logService
         .addLog(
           submission,
           posters
-            .filter(poster => poster.status !== 'CANCELLED')
-            .map(poster => ({
+            .filter((poster) => poster.status !== 'CANCELLED')
+            .map((poster) => ({
               part: {
                 ...poster.part.asPlain(),
                 postStatus: poster.status,
@@ -292,7 +292,7 @@ export class PostService {
         )
         .finally(() => {
           const canDelete: boolean =
-            posters.length === posters.filter(p => p.status === 'SUCCESS').length;
+            posters.length === posters.filter((p) => p.status === 'SUCCESS').length;
           if (canDelete) {
             const body = `Posted (${_.capitalize(submission.type)}) ${submission.title}`; // may want to make body more dynamic to title
             this.notificationService.create(
@@ -308,8 +308,8 @@ export class PostService {
             this.submissionService.deleteSubmission(submission._id, true);
           } else {
             const body = posters
-              .filter(p => p.status === 'FAILED')
-              .map(p => p.getMessage())
+              .filter((p) => p.status === 'FAILED')
+              .map((p) => p.getMessage())
               .join('\n');
             if (body) {
               this.notificationService.create(
@@ -327,7 +327,7 @@ export class PostService {
             this.uiNotificationService.createUINotification(
               NotificationType.ERROR,
               20,
-              posters.map(p => p.getMessage()).join('\n'),
+              posters.map((p) => p.getMessage()).join('\n'),
               `Post Failure: ${submission.title}`,
             );
           }
@@ -335,7 +335,7 @@ export class PostService {
 
       if (this.settings.getValue<boolean>('emptyQueueOnFailedPost')) {
         // If the failures were not cancels
-        const shouldEmptyQueue: boolean = !!posters.filter(p => p.status === 'FAILED').length;
+        const shouldEmptyQueue: boolean = !!posters.filter((p) => p.status === 'FAILED').length;
         if (shouldEmptyQueue) {
           this.clearQueueIfRequired(submission);
         }
@@ -455,11 +455,11 @@ export class PostService {
       ...submission.additional,
     ]);
     await Promise.all(
-      files.map(record => {
+      files.map((record) => {
         return fs
           .readFile(record.location)
-          .then(buffer => (record.buffer = buffer))
-          .catch(err => {
+          .then((buffer) => (record.buffer = buffer))
+          .catch((err) => {
             this.logger.error(err, 'Preload File Failure');
             // TODO do something with this?
           });

@@ -140,9 +140,7 @@ export class DeviantArt extends Website {
     const folders: Folder[] = [];
     const results = res.body.results || [];
     const flattenedFolders: DeviantArtFolder[] = [];
-    results.forEach((r: DeviantArtFolder) =>
-      flattenedFolders.push(...this.flattenFolders(r)),
-    );
+    results.forEach((r: DeviantArtFolder) => flattenedFolders.push(...this.flattenFolders(r)));
 
     flattenedFolders.forEach((folder) => {
       const parent = folder.parent

@@ -4,7 +4,7 @@ export class CustomHTMLParser {
       return '';
     }
     const blocks = ['p', 'div', 'pre'];
-    blocks.forEach(block => {
+    blocks.forEach((block) => {
       const regex = new RegExp(`<${block}(.*?)>((.|\n)*?)<\/${block}>`, 'gmi');
       html = html.replace(regex, '$2<br>');
     });

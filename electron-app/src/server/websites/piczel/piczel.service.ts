@@ -64,7 +64,7 @@ export class Piczel extends Website {
       },
     );
 
-    const folders: Folder[] = res.body.map(f => ({
+    const folders: Folder[] = res.body.map((f) => ({
       value: f.id.toString(),
       label: f.name,
     }));
@@ -78,7 +78,7 @@ export class Piczel extends Website {
 
   parseDescription(text: string): string {
     text = text.replace(/<br(\/|\s\/){0,1}>/g, '\n');
-    HTMLFormatParser.BLOCKS.forEach(block => {
+    HTMLFormatParser.BLOCKS.forEach((block) => {
       text = text
         .replace(new RegExp(`</${block}>`, 'g'), '')
         .replace(new RegExp(`<${block}.*?>`, 'g'), '');
@@ -96,8 +96,8 @@ export class Piczel extends Website {
       title: data.title || 'New Submission',
       tags: this.formatTags(data.tags),
       files: [data.primary, ...data.additional]
-        .filter(f => f)
-        .map(f => ({
+        .filter((f) => f)
+        .map((f) => ({
           name: f.file.options.filename,
           size: f.file.value.length,
           type: f.file.options.contentType,
@@ -158,7 +158,7 @@ export class Piczel extends Website {
         GenericAccountProp.FOLDERS,
         [],
       );
-      if (!folders.find(f => f.value === submissionPart.data.folder)) {
+      if (!folders.find((f) => f.value === submissionPart.data.folder)) {
         warnings.push(`Folder (${submissionPart.data.folder}) not found.`);
       }
     }
@@ -166,12 +166,12 @@ export class Piczel extends Website {
     const files = [
       submission.primary,
       ...(submission.additional || []).filter(
-        f => !f.ignoredAccounts!.includes(submissionPart.accountId),
+        (f) => !f.ignoredAccounts!.includes(submissionPart.accountId),
       ),
     ];
 
     const maxMB: number = 10;
-    files.forEach(file => {
+    files.forEach((file) => {
       const { type, size, name, mimetype } = file;
       if (FileSize.MBtoBytes(maxMB) < size) {
         if (!WebsiteValidator.supportsFileType(file, this.acceptsFiles)) {

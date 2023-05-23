@@ -61,7 +61,9 @@ export class SubscribeStarAdult extends Website {
       status.loggedIn = true;
       status.username = res.body.match(/<div class="top_bar-user_name">(.*?)<\/div>/)[1];
 
-      let usernameLink = res.body.match(/class="top_bar-branding for-adult">(.*?)href="(.*?)"/ims)[2];
+      let usernameLink = res.body.match(
+        /class="top_bar-branding for-adult">(.*?)href="(.*?)"/ims,
+      )[2];
       if (usernameLink && usernameLink.includes('/feed')) {
         usernameLink = `/${status.username}`;
       }
@@ -228,7 +230,7 @@ export class SubscribeStarAdult extends Website {
     data: FilePostData<SubscribeStarFileOptions>,
   ): Promise<PostResponse> {
     const usernameLink: string = this.getAccountInfo(data.part.accountId, 'username');
-    let { csrf, cookies, postKey, bucket } = await BrowserWindowUtil.runScriptOnPage<{
+    const { csrf, cookies, postKey, bucket } = await BrowserWindowUtil.runScriptOnPage<{
       csrf: string;
       cookies: string;
       postKey: string;

@@ -39,15 +39,15 @@ export class AccountService {
   ) {
     this.repository
       .find()
-      .then(results => {
+      .then((results) => {
         const removedModules = results.filter(
-          result => !websiteProvider.websiteModuleExists(result.website),
+          (result) => !websiteProvider.websiteModuleExists(result.website),
         );
-        removedModules.forEach(remove => this.removeAccount(remove._id));
-        return results.filter(result => websiteProvider.websiteModuleExists(result.website));
+        removedModules.forEach((remove) => this.removeAccount(remove._id));
+        return results.filter((result) => websiteProvider.websiteModuleExists(result.website));
       })
-      .then(results => {
-        results.forEach(result => {
+      .then((results) => {
+        results.forEach((result) => {
           this.loginStatuses.push({
             _id: result._id,
             alias: result.alias,
@@ -59,19 +59,19 @@ export class AccountService {
         });
       })
       .finally(() => {
-        Promise.all(this.loginStatuses.map(s => this.checkLogin(s._id))).finally(
+        Promise.all(this.loginStatuses.map((s) => this.checkLogin(s._id))).finally(
           () => this.submissionService.postingStateChanged(), // Force updates to validation in case any website was slow
         );
       });
 
-    this.websiteProvider.getAllWebsiteModules().forEach(website => {
+    this.websiteProvider.getAllWebsiteModules().forEach((website) => {
       const { refreshInterval } = website;
       if (!this.loginCheckTimers[refreshInterval]) {
         this.loginCheckTimers[refreshInterval] = setInterval(async () => {
           const accountsToRefresh = await this.repository.find({
             website: { $in: this.loginCheckMap[refreshInterval] },
           });
-          accountsToRefresh.forEach(account => this.checkLogin(account));
+          accountsToRefresh.forEach((account) => this.checkLogin(account));
         }, refreshInterval);
       }
 
@@ -140,7 +140,7 @@ export class AccountService {
     this.logger.log(id, 'Delete Account');
 
     await this.repository.remove(id);
-    const index: number = this.loginStatuses.findIndex(s => s._id === id);
+    const index: number = this.loginStatuses.findIndex((s) => s._id === id);
     if (index !== -1) {
       this.loginStatuses.splice(index, 1);
     }
@@ -169,7 +169,7 @@ export class AccountService {
 
     account.alias = alias;
     await this.repository.update(account);
-    this.loginStatuses.find(status => status._id === id).alias = alias;
+    this.loginStatuses.find((status) => status._id === id).alias = alias;
     this.eventEmitter.emit(Events.AccountEvent.STATUS_UPDATED, this.getLoginStatuses());
   }
 
@@ -215,7 +215,7 @@ export class AccountService {
   }
 
   private async insertOrUpdateLoginStatus(login: UserAccountDto): Promise<void> {
-    const index: number = this.loginStatuses.findIndex(s => s._id === login._id);
+    const index: number = this.loginStatuses.findIndex((s) => s._id === login._id);
     this.loginStatuses[index] = login;
     this.eventEmitter.emit(Events.AccountEvent.STATUS_UPDATED, this.getLoginStatuses());
   }

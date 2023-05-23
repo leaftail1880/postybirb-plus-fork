@@ -73,7 +73,7 @@ export class FurryNetwork extends Website {
       this.storeAccountInformation(data._id, 'user', user);
       try {
         await Promise.all(
-          user.characters.map(character =>
+          user.characters.map((character) =>
             this.loadCollections(data._id, token.access_token, character.name),
           ),
         );
@@ -217,7 +217,7 @@ export class FurryNetwork extends Website {
       }),
     );
 
-    const res = responses.find(r => r.body);
+    const res = responses.find((r) => r.body);
     if (!res.body || !res.body.id) {
       throw this.createPostResponse({ additionalInfo: res.body });
     }
@@ -381,13 +381,13 @@ export class FurryNetwork extends Website {
   formatTags(tags: string[]) {
     return super
       .formatTags(tags, { spaceReplacer: '-', maxLength: 30, minLength: 3 })
-      .map(tag =>
+      .map((tag) =>
         tag
           .replace(/(\(|\)|:|#|;|\]|\[|\.|')/g, '')
           .replace(/(\\|\/)/g, '-')
           .replace(/\?/g, 'unknown'),
       )
-      .filter(tag => tag.length >= 3)
+      .filter((tag) => tag.length >= 3)
       .slice(0, 30);
   }
 
@@ -414,8 +414,8 @@ export class FurryNetwork extends Website {
         `${submissionPart.data.profile}-collections`,
       );
       if (collections && collections[type]) {
-        submissionPart.data.folders.forEach(f => {
-          const found = collections[type].find(c => c.id === f);
+        submissionPart.data.folders.forEach((f) => {
+          const found = collections[type].find((c) => c.id === f);
           if (!found) {
             problems.push(`Folder (${f}) not found.`);
           }
@@ -425,16 +425,12 @@ export class FurryNetwork extends Website {
 
     if (!WebsiteValidator.supportsFileType(submission.primary, this.acceptsFiles)) {
       if (submission.primary.type === FileSubmissionType.TEXT && !submission.fallback) {
-        problems.push(
-          `Currently supported file formats: ${this.acceptsFiles.join(', ')}`,
-        );
+        problems.push(`Currently supported file formats: ${this.acceptsFiles.join(', ')}`);
         problems.push('A fallback file is required.');
       } else if (submission.primary.type === FileSubmissionType.TEXT && submission.fallback) {
         warnings.push('The fallback text will be used.');
       } else {
-        problems.push(
-          `Currently supported file formats: ${this.acceptsFiles.join(', ')}`,
-        );
+        problems.push(`Currently supported file formats: ${this.acceptsFiles.join(', ')}`);
       }
     }
 
@@ -478,8 +474,8 @@ export class FurryNetwork extends Website {
         `${submissionPart.data.profile}-collections`,
       );
       if (collections && collections[type]) {
-        submissionPart.data.folders.forEach(f => {
-          const found = collections[type].find(c => c.id === f);
+        submissionPart.data.folders.forEach((f) => {
+          const found = collections[type].find((c) => c.id === f);
           if (!found) {
             problems.push(`Folder (${f}) not found.`);
           }

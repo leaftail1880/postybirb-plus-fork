@@ -250,7 +250,7 @@ export class Patreon extends Website {
   }
 
   private toUTCISO(date: Date | string): string {
-    let d: Date = typeof date === 'string' ? new Date(date) : date;
+    const d: Date = typeof date === 'string' ? new Date(date) : date;
     return d.toISOString().split('.').shift();
   }
 

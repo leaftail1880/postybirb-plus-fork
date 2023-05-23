@@ -131,11 +131,11 @@ export default class AppLayout extends React.Component<Props, State> {
                 you are posting to.
               </p>
               <p>
-                <strong>You are responsible for everything you post.</strong>
-              </p>
+                      <strong>You are responsible for everything you post.</strong>
+                    </p>
             </Tabs.TabPane>
             <Tabs.TabPane tab="License" key="license">
-              <p className="text-justify">
+                  <p className="text-justify">
                 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
                 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
                 OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
@@ -146,7 +146,7 @@ export default class AppLayout extends React.Component<Props, State> {
                 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
                 ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
                 DAMAGE.
-              </p>
+                  </p>
             </Tabs.TabPane>
           </Tabs>
         </Modal>
@@ -157,7 +157,7 @@ export default class AppLayout extends React.Component<Props, State> {
                 <div
                   className="logo"
                   style={{
-                    backgroundImage: `url("${process.env.PUBLIC_URL}/assets/icons/minnowicon.png")`
+                    backgroundImage: `url("./assets/icons/minnowicon.png")`
                   }}
                 >
                   PostyBirb
@@ -177,10 +177,10 @@ export default class AppLayout extends React.Component<Props, State> {
               defaultOpenKeys={state.navCollapsed ? [] : ['submissions', 'templates']}
             >
               <Menu.Item key="home">
-                <Link to="/">
+                    <Link to="/">
                   <Icon type="home" />
-                  <span>Home</span>
-                </Link>
+                      <span>Home</span>
+                    </Link>
               </Menu.Item>
               <Menu.Item key="accounts" onClick={this.showDrawer}>
                 <Icon type="user" />
@@ -199,87 +199,87 @@ export default class AppLayout extends React.Component<Props, State> {
                 }
               >
                 <Menu.Item key="file-submissions">
-                  <Link to={`/${SubmissionType.FILE}`}>
+                          <Link to={`/${SubmissionType.FILE}`}>
                     <Icon type="file" />
-                    <span>File</span>
-                  </Link>
+                            <span>File</span>
+                          </Link>
                 </Menu.Item>
 
                 <Menu.Item key="notification-submissions">
-                  <Link to={`/${SubmissionType.NOTIFICATION}`}>
+                          <Link to={`/${SubmissionType.NOTIFICATION}`}>
                     <Icon type="notification" />
-                    <span>Notification</span>
-                  </Link>
+                            <span>Notification</span>
+                          </Link>
                 </Menu.Item>
               </Menu.SubMenu>
 
               <Menu.SubMenu
                 key="templates"
                 title={
-                  <span>
+                      <span>
                     <Icon type="snippets" />
-                    <span>Templates</span>
-                  </span>
+                        <span>Templates</span>
+                      </span>
                 }
               >
                 <Menu.Item
                   key="description-templates"
                   onClick={() => this.setState({ descriptionTemplateVisible: true })}
                 >
-                  <span>
-                    <span>
-                      <i
-                        aria-label="icon: description-template"
-                        className="anticon description-template"
-                      >
-                        <svg
-                          viewBox="0 0 20 20"
-                          focusable="false"
-                          data-icon="description-template"
-                          width="1em"
-                          height="1em"
-                          fill="currentColor"
-                          aria-hidden={true}
-                        >
-                          <path d="M19 19v-1H5v1h14zM9 16v-4a5 5 0 1 1 6 0v4h4a2 2 0 0 1 2 2v3H3v-3c0-1.1.9-2 2-2h4zm4 0v-5l.8-.6a3 3 0 1 0-3.6 0l.8.6v5h2z"></path>
-                        </svg>
-                      </i>
-                    </span>
-                    <span>Description</span>
-                  </span>
+                        <span>
+                          <span>
+                            <i
+                              aria-label="icon: description-template"
+                              className="anticon description-template"
+                            >
+                              <svg
+                                viewBox="0 0 20 20"
+                                focusable="false"
+                                data-icon="description-template"
+                                width="1em"
+                                height="1em"
+                                fill="currentColor"
+                                aria-hidden={true}
+                              >
+                                <path d="M19 19v-1H5v1h14zM9 16v-4a5 5 0 1 1 6 0v4h4a2 2 0 0 1 2 2v3H3v-3c0-1.1.9-2 2-2h4zm4 0v-5l.8-.6a3 3 0 1 0-3.6 0l.8.6v5h2z"></path>
+                              </svg>
+                            </i>
+                          </span>
+                          <span>Description</span>
+                        </span>
                 </Menu.Item>
                 <Menu.Item
                   key="custom-shortcuts"
                   onClick={() => this.setState({ descriptionShortcutsVisible: true })}
                 >
-                  <span>
+                        <span>
                     <Icon type="pic-right" />
-                    <span>Shortcuts</span>
-                  </span>
+                          <span>Shortcuts</span>
+                        </span>
                 </Menu.Item>
                 <Menu.Item
                   key="tag-converters"
                   onClick={() => this.setState({ tagConverterVisible: true })}
                 >
-                  <span>
+                        <span>
                     <Icon type="share-alt" />
-                    <span>Tag Converters</span>
-                  </span>
+                          <span>Tag Converters</span>
+                        </span>
                 </Menu.Item>
                 <Menu.Item
                   key="tag-groups"
                   onClick={() => this.setState({ tagGroupVisible: true })}
                 >
-                  <span>
+                        <span>
                     <Icon type="tags" />
-                    <span>Tag Groups</span>
-                  </span>
+                          <span>Tag Groups</span>
+                        </span>
                 </Menu.Item>
                 <Menu.Item key="submission-templates">
-                  <Link to="/submission-templates">
+                        <Link to="/submission-templates">
                     <Icon type="form" />
-                    <span>Submission</span>
-                  </Link>
+                          <span>Submission</span>
+                        </Link>
                 </Menu.Item>
               </Menu.SubMenu>
 
@@ -287,25 +287,25 @@ export default class AppLayout extends React.Component<Props, State> {
                 key="discord"
                 onClick={() =>
                   window.electron.shell.openInBrowser('https://discordapp.com/invite/jK5JQJF')
-                }
+                    }
               >
-                <Icon component={DiscordIcon} />
-                <span>Discord</span>
+                      <Icon component={DiscordIcon} />
+                      <span>Discord</span>
               </Menu.Item>
 
               <Menu.Item
                 key="donate"
                 onClick={() => window.electron.shell.openInBrowser('http://ko-fi.com/A81124JD')}
               >
-                <Icon component={KofiIcon} />
-                <span>Donate</span>
+                      <Icon component={KofiIcon} />
+                      <span>Donate</span>
               </Menu.Item>
 
               <Menu.Item key="setting" onClick={() => this.setState({ settingsVisible: true })}>
-                <span>
+                      <span>
                   <Icon type="setting" />
-                  <span>Settings</span>
-                </span>
+                        <span>Settings</span>
+                      </span>
               </Menu.Item>
             </Menu>
             <Drawer

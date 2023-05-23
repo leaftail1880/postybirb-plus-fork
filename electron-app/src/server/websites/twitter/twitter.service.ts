@@ -65,7 +65,7 @@ export class Twitter extends Website {
     data: FilePostData<TwitterFileOptions>,
     accountData: TwitterAccountData,
   ): Promise<PostResponse> {
-    let contentBlur = data?.options?.contentBlur;
+    const contentBlur = data?.options?.contentBlur;
 
     const form: any = {
       token: accountData.oauth_token,

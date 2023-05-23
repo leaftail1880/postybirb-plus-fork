@@ -25,14 +25,12 @@ import { PatreonModule } from './patreon/patreon.module';
 import { TumblrModule } from './tumblr/tumblr.module';
 import { DeviantArtModule } from './deviant-art/deviant-art.module';
 import { ManebooruModule } from './manebooru/manebooru.module';
-import { MastodonModule } from './mastodon/mastodon.module';
 import { TwitterModule } from './twitter/twitter.module';
 import { PillowfortModule } from './pillowfort/pillowfort.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { FurbooruModule } from './furbooru/furbooru.module';
 import { ItakuModule } from './itaku/itaku.module';
 import { PicartoModule } from './picarto/picarto.module';
-import { PixelfedModule } from './pixelfed/pixelfed.module';
 import { SubscribeStarAdultModule } from './subscribe-star-adult/subscribe-star-adult.module';
 
 @Module({
@@ -55,7 +53,6 @@ import { SubscribeStarAdultModule } from './subscribe-star-adult/subscribe-star-
     InkbunnyModule,
     KoFiModule,
     ManebooruModule,
-    MastodonModule,
     NewTumblModule,
     NewgroundsModule,
     PatreonModule,
@@ -71,7 +68,6 @@ import { SubscribeStarAdultModule } from './subscribe-star-adult/subscribe-star-
     WeasylModule,
     ItakuModule,
     PicartoModule,
-    PixelfedModule,
   ],
 })
 export class WebsitesModule {}

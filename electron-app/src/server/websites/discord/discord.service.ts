@@ -167,15 +167,17 @@ export class Discord extends Website {
     const files = [
       submission.primary,
       ...(submission.additional || []).filter(
-        f => !f.ignoredAccounts!.includes(submissionPart.accountId),
+        (f) => !f.ignoredAccounts!.includes(submissionPart.accountId),
       ),
     ];
 
     const maxMB: number = 8;
-    files.forEach(file => {
+    files.forEach((file) => {
       const { type, size, name, mimetype } = file;
       if (FileSize.MBtoBytes(maxMB) < size) {
-        warnings.push(`Discord requires files be 8MB or less, unless your channel has been boosted.`);
+        warnings.push(
+          `Discord requires files be 8MB or less, unless your channel has been boosted.`,
+        );
       }
     });
 

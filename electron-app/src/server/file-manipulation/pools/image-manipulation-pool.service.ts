@@ -24,7 +24,7 @@ export class ImageManipulationPoolService {
   constructor(private readonly uiNotificationService: UiNotificationService) {}
 
   getImageManipulator(data: Buffer, type: string): Promise<ImageManipulator> {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
       if (data.length > ImageManipulator.DEFERRED_LIMIT) {
         if (this.inUse.length < this.MAX_COUNT) {
           const im = await ImageManipulator.build(data, type as any);

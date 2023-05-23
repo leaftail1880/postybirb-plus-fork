@@ -141,7 +141,7 @@ export class HentaiFoundry extends Website {
   formatTags(tags: string[]) {
     const maxLength = 500;
     const t = super.formatTags(tags);
-    let tagString = t.join(', ').trim();
+    const tagString = t.join(', ').trim();
 
     return tagString.length > maxLength
       ? tagString
@@ -170,7 +170,7 @@ export class HentaiFoundry extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 50;
+    const maxMB: number = 50;
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (
         isAutoscaling &&

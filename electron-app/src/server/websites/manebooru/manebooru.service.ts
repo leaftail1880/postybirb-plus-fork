@@ -54,7 +54,6 @@ export class Manebooru extends Website {
     return { maxSize: FileSize.MBtoBytes(100) };
   }
 
-
   async postFileSubmission(
     cancellationToken: CancellationToken,
     data: FilePostData<ManebooruFileOptions>,
@@ -159,7 +158,7 @@ export class Manebooru extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 100;
+    const maxMB: number = 100;
 
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (

@@ -33,7 +33,7 @@ export class NewTumbl extends Website {
 
   private async getLoginToken(partitionId: string): Promise<string | undefined> {
     const tokenCookie = (await Http.getWebsiteCookies(partitionId, this.BASE_URL))
-      .filter(c => c.name === 'LoginToken')
+      .filter((c) => c.name === 'LoginToken')
       .shift();
     if (tokenCookie) {
       return tokenCookie.value;
@@ -101,7 +101,7 @@ export class NewTumbl extends Website {
 
   private getDefaultBlog(profileId: string): NewTumblBlog | undefined {
     return this.getAccountInfo(profileId, 'blogs')
-      .filter(blog => blog.primary)
+      .filter((blog) => blog.primary)
       .shift();
   }
 
@@ -204,7 +204,7 @@ export class NewTumbl extends Website {
     }
 
     const rating = this.getRating(data.rating);
-    const tags = data.tags.map(t => `#${t}`).join('');
+    const tags = data.tags.map((t) => `#${t}`).join('');
     this.checkCancelled(cancellationToken);
     const postOptions = await Http.post<any>(
       `${this.API_URL}/set_Post_Options`,
@@ -309,7 +309,7 @@ export class NewTumbl extends Website {
       return Promise.reject(this.createPostResponse({ additionalInfo: getCompose.body }));
     }
 
-    const files = [data.primary.file, ...data.additional.map(f => f.file)];
+    const files = [data.primary.file, ...data.additional.map((f) => f.file)];
     for (const f of files) {
       const upload = await Http.post<any>(
         `https://up0.newtumbl.com/sba/${loginToken}`,
@@ -400,7 +400,7 @@ export class NewTumbl extends Website {
     }
 
     const rating = this.getRating(data.rating);
-    const tags = data.tags.map(t => `#${t}`).join('');
+    const tags = data.tags.map((t) => `#${t}`).join('');
     this.checkCancelled(cancellationToken);
     const postOptions = await Http.post<any>(
       `${this.API_URL}/set_Post_Options`,
@@ -470,7 +470,7 @@ export class NewTumbl extends Website {
 
     if (submissionPart.data.blog) {
       const blogs: NewTumblBlog[] = this.getAccountInfo(submissionPart.accountId, 'blogs') || [];
-      if (!blogs.find(b => b.id === submissionPart.data.blog)) {
+      if (!blogs.find((b) => b.id === submissionPart.data.blog)) {
         problems.push(`Blog (${submissionPart.data.blog}) not found.`);
       }
     } else {
@@ -480,11 +480,11 @@ export class NewTumbl extends Website {
     const files = [
       submission.primary,
       ...(submission.additional || []).filter(
-        f => !f.ignoredAccounts!.includes(submissionPart.accountId),
+        (f) => !f.ignoredAccounts!.includes(submissionPart.accountId),
       ),
     ];
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const { name, mimetype } = file;
       if (!WebsiteValidator.supportsFileType(file, this.acceptsFiles)) {
         problems.push(`Does not support file format: (${name}) ${mimetype}.`);
@@ -504,7 +504,7 @@ export class NewTumbl extends Website {
 
     if (submissionPart.data.blog) {
       const blogs: NewTumblBlog[] = this.getAccountInfo(submissionPart.accountId, 'blogs') || [];
-      if (!blogs.find(b => b.id === submissionPart.data.blog)) {
+      if (!blogs.find((b) => b.id === submissionPart.data.blog)) {
         problems.push(`Blog (${submissionPart.data.blog}) not found.`);
       }
     } else {

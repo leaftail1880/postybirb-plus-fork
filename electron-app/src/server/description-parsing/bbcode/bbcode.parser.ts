@@ -22,7 +22,7 @@ export class BBCodeParser {
     html = html.replace(/<strong>/gi, '[b]');
     html = html.replace(/<\/strong>/gi, '[/b]');
 
-    BBCodeParser.BLOCKS.forEach(block => {
+    BBCodeParser.BLOCKS.forEach((block) => {
       const regex = new RegExp(
         `<${block}(.*?)style="text-align:((left|right|center)?)"(.*?)>((.|\n)*?)<\/${block}>`,
         'gmi',
@@ -49,7 +49,7 @@ export class BBCodeParser {
     html = html.replace(/<ol(.*?)>/gi, '\n');
     html = html.replace(/<\/ol>/gi, '\n');
 
-    BBCodeParser.BLOCKS.forEach(block => {
+    BBCodeParser.BLOCKS.forEach((block) => {
       const regex1 = new RegExp(`</${block}>`, 'gmi');
       html = html.replace(regex1, '\n');
 
@@ -85,15 +85,15 @@ export class BBCodeParser {
     html = html.replace(/(\n|\r)/g, '');
 
     const tags: string[] = ['b', 's', 'u', 'i'];
-    tags.forEach(tag => {
-      BBCodeParser.BLOCKS.forEach(block => {
+    tags.forEach((tag) => {
+      BBCodeParser.BLOCKS.forEach((block) => {
         const regex = new RegExp(`\\[\/${tag}\\]<\/${block}><${block}>\\[${tag}\\]`, 'gmi');
         html = html.replace(regex, '\n');
       });
     });
 
     const blocks = ['left', 'right', 'center'];
-    blocks.forEach(block => {
+    blocks.forEach((block) => {
       const regex = new RegExp(`\\[\/${block}\\]\\[${block}\\]`, 'gmi');
       html = html.replace(regex, '\n');
     });

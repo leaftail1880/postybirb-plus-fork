@@ -220,7 +220,7 @@ export class SubscribeStar extends Website {
     data: FilePostData<SubscribeStarFileOptions>,
   ): Promise<PostResponse> {
     const usernameLink: string = this.getAccountInfo(data.part.accountId, 'username');
-    let { csrf, cookies, postKey, bucket } = await BrowserWindowUtil.runScriptOnPage<{
+    const { csrf, cookies, postKey, bucket } = await BrowserWindowUtil.runScriptOnPage<{
       csrf: string;
       cookies: string;
       postKey: string;

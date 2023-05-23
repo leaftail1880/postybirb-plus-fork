@@ -80,7 +80,7 @@ export class SubmissionPartService {
     if (incompleteOnly) {
       return this.repository
         .find({ submissionId })
-        .then(parts => parts.filter(part => part.postStatus !== 'SUCCESS'));
+        .then((parts) => parts.filter((part) => part.postStatus !== 'SUCCESS'));
     }
     return this.repository.find({ submissionId });
   }

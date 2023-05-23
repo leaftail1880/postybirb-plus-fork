@@ -22,7 +22,7 @@ export class LogService {
   async getLogs(type?: SubmissionType): Promise<SubmissionLogEntity[]> {
     let logs = await this.repository.find();
     if (type) {
-      logs = logs.filter(log => log.submission.type === type);
+      logs = logs.filter((log) => log.submission.type === type);
     }
     return logs.sort((a, b) => a.created - b.created).reverse();
   }
@@ -39,9 +39,9 @@ export class LogService {
           submission: copy,
           parts,
           version: app.getVersion(),
-          defaultPart: (await this.partService.getPartsForSubmission(submission._id, false)).filter(
-            p => p.isDefault,
-          )[0],
+          defaultPart: (
+            await this.partService.getPartsForSubmission(submission._id, false)
+          ).filter((p) => p.isDefault)[0],
         }),
       );
 
@@ -54,13 +54,13 @@ export class LogService {
     if (logs.length > this.MAX_LOGS) {
       const sorted = logs.sort((a, b) => a.created - b.created).reverse();
       sorted.splice(0, this.MAX_LOGS);
-      await Promise.all(sorted.map(log => this.repository.remove(log._id)));
+      await Promise.all(sorted.map((log) => this.repository.remove(log._id)));
     }
   }
 
   private cleanBuffers(submission: FileSubmission) {
     [submission.primary, submission.fallback, submission.thumbnail, ...submission.additional]
-      .filter(s => s)
-      .forEach(file => (file.buffer = undefined));
+      .filter((s) => s)
+      .forEach((file) => (file.buffer = undefined));
   }
 }

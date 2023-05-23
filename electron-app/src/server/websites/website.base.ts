@@ -118,12 +118,12 @@ export abstract class Website {
     options: TagParseOptions = { spaceReplacer: '_', minLength: 1, maxLength: 100 },
   ): string[] {
     return tags
-      .map(tag => tag.trim())
-      .filter(tag => tag)
-      .filter(tag => {
+      .map((tag) => tag.trim())
+      .filter((tag) => tag)
+      .filter((tag) => {
         return tag.length >= (options.minLength || 1) && tag.length <= (options.maxLength || 100);
       })
-      .map(tag => tag.replace(/\s/g, options.spaceReplacer).trim());
+      .map((tag) => tag.replace(/\s/g, options.spaceReplacer).trim());
   }
 
   protected formatTags(tags: string[], options?: TagParseOptions): any {

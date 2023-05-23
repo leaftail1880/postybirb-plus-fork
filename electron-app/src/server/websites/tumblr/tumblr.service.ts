@@ -78,14 +78,14 @@ export class Tumblr extends Website {
       title,
       description: data.description,
       tags: data.tags,
-      files: [data.primary, ...data.additional].map(f => ({
+      files: [data.primary, ...data.additional].map((f) => ({
         data: f.file.value.toString('base64'),
         ...f.file.options,
       })),
       options: {
         blog: options.blog
           ? options.blog
-          : this.getAccountInfo(data.part.accountId, 'blogs').find(b => b.primary).name,
+          : this.getAccountInfo(data.part.accountId, 'blogs').find((b) => b.primary).name,
       },
     };
 
@@ -127,7 +127,7 @@ export class Tumblr extends Website {
       options: {
         blog: options.blog
           ? options.blog
-          : this.getAccountInfo(data.part.accountId, 'blogs').find(b => b.primary).name,
+          : this.getAccountInfo(data.part.accountId, 'blogs').find((b) => b.primary).name,
       },
     };
 
@@ -174,11 +174,11 @@ export class Tumblr extends Website {
     const files = [
       submission.primary,
       ...(submission.additional || []).filter(
-        f => !f.ignoredAccounts!.includes(submissionPart.accountId),
+        (f) => !f.ignoredAccounts!.includes(submissionPart.accountId),
       ),
     ];
 
-    files.forEach(file => {
+    files.forEach((file) => {
       const { type, size, name, mimetype } = file;
       if (!WebsiteValidator.supportsFileType(file, this.acceptsFiles)) {
         problems.push(`Does not support file format: (${name}) ${mimetype}.`);

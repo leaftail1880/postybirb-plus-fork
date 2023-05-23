@@ -240,7 +240,12 @@ export class Picarto extends Website {
       finishPost.body?.data?.createArtwork?.status === 'error' ||
       finishPost.body.errors?.length
     ) {
-      return Promise.reject(this.createPostResponse({ message: finishPost.body?.data?.createArtwork?.message, additionalInfo: finishPost.body }));
+      return Promise.reject(
+        this.createPostResponse({
+          message: finishPost.body?.data?.createArtwork?.message,
+          additionalInfo: finishPost.body,
+        }),
+      );
     }
 
     return this.createPostResponse({});

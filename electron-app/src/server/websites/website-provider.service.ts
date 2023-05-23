@@ -23,7 +23,6 @@ import { Patreon } from './patreon/patreon.service';
 import { Tumblr } from './tumblr/tumblr.service';
 import { DeviantArt } from './deviant-art/deviant-art.service';
 import { Manebooru } from './manebooru/manebooru.service';
-import { Mastodon } from './mastodon/mastodon.service';
 import { Twitter } from './twitter/twitter.service';
 import { Pillowfort } from './pillowfort/pillowfort.service';
 import { Telegram } from './telegram/telegram.service';
@@ -31,7 +30,6 @@ import { Furbooru } from './furbooru/furbooru.service';
 import { Itaku } from './itaku/itaku.service';
 import { Picarto } from './picarto/picarto.service';
 import { SubscribeStarAdult } from './subscribe-star-adult/subscribe-star-adult.service';
-import { Pixelfed } from './pixelfed/pixelfed.service';
 
 @Injectable()
 export class WebsiteProvider {
@@ -62,14 +60,12 @@ export class WebsiteProvider {
     readonly tumblr: Tumblr,
     readonly deviantArt: DeviantArt,
     readonly manebooru: Manebooru,
-    readonly mastodon: Mastodon,
     readonly twitter: Twitter,
     readonly pillowfort: Pillowfort,
     readonly telegram: Telegram,
     readonly furbooru: Furbooru,
     readonly itaku: Itaku,
     readonly picarto: Picarto,
-    readonly pixelfed: Pixelfed,
   ) {
     this.websiteModules = [...arguments].filter((arg) => arg instanceof Website);
     this.websiteModules.forEach(

@@ -15,11 +15,11 @@ export class ValidatorService {
   constructor(private readonly websiteProvider: WebsiteProvider) {}
 
   validateParts(submission: Submission, parts: Array<SubmissionPart<any>>): Problems {
-    const defaultPart: SubmissionPart<DefaultOptions> = parts.find(p => p.isDefault);
+    const defaultPart: SubmissionPart<DefaultOptions> = parts.find((p) => p.isDefault);
     const websiteProblems: Problems = {};
     parts
-      .filter(p => !p.isDefault)
-      .forEach(p => {
+      .filter((p) => !p.isDefault)
+      .forEach((p) => {
         websiteProblems[p.accountId] = {
           ...this.validatePart(submission, p, defaultPart),
           website: p.website,

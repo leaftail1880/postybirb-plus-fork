@@ -171,7 +171,7 @@ export class e621 extends Website {
     }
 
     const { type, size, name } = submission.primary;
-    let maxMB: number = 100;
+    const maxMB: number = 100;
 
     if (FileSize.MBtoBytes(maxMB) < size) {
       if (

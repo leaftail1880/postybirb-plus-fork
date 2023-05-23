@@ -80,8 +80,8 @@ export class HTMLFormatParser {
 
     let lastNode = null;
     childNodes
-      .filter(node => !node.value || node.value !== '\n')
-      .forEach(node => {
+      .filter((node) => !node.value || node.value !== '\n')
+      .forEach((node) => {
         if (lastNode && lastNode.tagName === 'a' && node.tagName === 'a') {
           lastNode = node;
           nodeTree.push({

@@ -4,8 +4,8 @@ export default class HtmlParserUtil {
   public static getInputValue(html: string, name: string, index: number = 0): string {
     index = index || 0;
     const inputs = (html.match(/<input.*?(\/)*>/gim) || [])
-      .filter(input => input.includes(`name="${name}"`))
-      .map(input => {
+      .filter((input) => input.includes(`name="${name}"`))
+      .map((input) => {
         return input.match(/value="(.*?)"/)[1];
       });
 

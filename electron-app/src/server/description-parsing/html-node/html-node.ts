@@ -33,7 +33,7 @@ export default class HtmlNode {
       this.fragment = fragment.fragment;
       this.styles = Object.assign({}, fragment.styles);
       this.breakBefore = fragment.breakBefore;
-      this.children = fragment.children.map(c => new HtmlNode(this, c));
+      this.children = fragment.children.map((c) => new HtmlNode(this, c));
     } else {
       this.parent = parent;
       this.level = level || 0;
@@ -87,8 +87,8 @@ export default class HtmlNode {
     if (matchStyles) {
       matchStyles[1]
         .split(';')
-        .filter(style => style)
-        .map(style => {
+        .filter((style) => style)
+        .map((style) => {
           const [prop, value] = style.split(':');
           return { prop: prop.trim(), value: value.trim() };
         })
@@ -113,7 +113,7 @@ export default class HtmlNode {
         break;
       }
     }
-    return segments.filter(s => s);
+    return segments.filter((s) => s);
   }
 
   private findNextSegment(html: string) {
@@ -219,14 +219,14 @@ export default class HtmlNode {
       this.tagName = to;
     }
 
-    this.children.forEach(child => child.convertTag(from, to));
+    this.children.forEach((child) => child.convertTag(from, to));
   }
 
   public createClasses(classCreator: (tag: string, style: string, value: string) => string) {
     this.classes = Object.entries(this.styles).map(([style, value]) =>
       classCreator(this.tagName, style, value),
     );
-    this.children.forEach(child => child.createClasses(classCreator));
+    this.children.forEach((child) => child.createClasses(classCreator));
   }
 
   public collapseSimilarTags(onStyleOnly?: boolean) {
@@ -245,7 +245,7 @@ export default class HtmlNode {
             Object.keys(this.styles).length
           ) {
             next.parent = null;
-            next.children.forEach(child => {
+            next.children.forEach((child) => {
               child.parent = this;
               child.breakBefore = true;
               this.children.push(child);
@@ -276,7 +276,7 @@ export default class HtmlNode {
     }
 
     const uniqueChildren = [];
-    this.children.forEach(child => {
+    this.children.forEach((child) => {
       if (!uniqueChildren.includes(child)) {
         uniqueChildren.push(child);
       }
@@ -286,8 +286,8 @@ export default class HtmlNode {
 
   public removeUnallowedStyles(allowedStyles: string[]) {
     Object.keys(this.styles)
-      .filter(key => !allowedStyles.includes[key])
-      .forEach(style => delete this.styles[style]);
-    this.children.forEach(child => child.removeUnallowedStyles(allowedStyles));
+      .filter((key) => !allowedStyles.includes[key])
+      .forEach((style) => delete this.styles[style]);
+    this.children.forEach((child) => child.removeUnallowedStyles(allowedStyles));
   }
 }

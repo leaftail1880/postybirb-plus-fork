@@ -23,14 +23,14 @@ export class PlainConverter {
         if (node.tagName === SpecialTag.A) {
           return hrefFn(
             node.children
-              .map(child => PlainConverter.convert(child, hrefParser))
+              .map((child) => PlainConverter.convert(child, hrefParser))
               .join('\n')
               .trim(),
             node.href,
           );
         }
         return node.children
-          .map(child => ({
+          .map((child) => ({
             child,
             text: PlainConverter.convert(child, hrefParser),
           }))

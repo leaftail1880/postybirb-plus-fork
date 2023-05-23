@@ -285,14 +285,14 @@ export default class ImageManipulator {
           }
         },
       );
-      this.process.on('error', err => {
+      this.process.on('error', (err) => {
         // tslint:disable-next-line: no-console
         console.log('Worker thread error', err);
         if (this.reject) {
           this.reject(err);
         }
       });
-      this.process.on('exit', code => {
+      this.process.on('exit', (code) => {
         if (this.reject) {
           this.reject(code);
           this.destroy();
