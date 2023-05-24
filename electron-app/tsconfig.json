@@ -10,11 +10,12 @@
     "outDir": "./back",
     "baseUrl": "./",
     "incremental": true,
-    "rootDir": "./src",
+    "rootDir": ".",
     "skipLibCheck": true,
     "paths": {
       "postybirb-commons": ["../commons", "../commons/src/index"]
     }
   },
-  "exclude": ["node_modules", "back", "test"]
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "back"]
 }
