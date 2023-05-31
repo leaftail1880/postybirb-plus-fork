@@ -68,7 +68,7 @@ export default class App extends React.Component {
           tagConverterStore={tagConverterStore}
         >
           <Modal
-            open={this.state.showConfirmation}
+            visible={this.state.showConfirmation}
             onCancel={this.chooseConfirmation.bind(this, false)}
             onOk={this.chooseConfirmation.bind(this, true)}
           >

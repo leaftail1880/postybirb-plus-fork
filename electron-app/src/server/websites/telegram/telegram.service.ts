@@ -1,6 +1,5 @@
 import MTProtoClass = require('@mtproto/core');
 import { Injectable } from '@nestjs/common';
-import { writeJSON } from 'fs-extra';
 import {
   DefaultOptions,
   FileRecord,
@@ -227,25 +226,23 @@ export class Telegram extends Website {
       limit: 100,
     });
 
-    const channels1 = chats.filter((c) => {
-      // Skip forbidden chats
-      if (c.left || c.deactivated || !['channel', 'chat'].includes(c._)) return false;
+    const channels: Folder[] = chats
+      .filter((c) => {
+        // Skip forbidden chats
+        if (c.left || c.deactivated || !['channel', 'chat'].includes(c._)) return false;
 
-      if (
-        c.creator ||
-        c.admin_rights?.post_messages ||
-        // Reverted means that user can send media
-        c.default_banned_rights?.send_media === false
-      )
-        return true;
-    });
-
-    writeJSON('TG.json', channels1, { spaces: 2 });
-
-    const channels: Folder[] = channels1.map((c) => ({
-      label: c.title,
-      value: `${c.id}-${c.access_hash}`,
-    }));
+        if (
+          c.creator ||
+          c.admin_rights?.post_messages ||
+          // Reverted means that user can send media
+          c.default_banned_rights?.send_media === false
+        )
+          return true;
+      })
+      .map((c) => ({
+        label: c.title,
+        value: `${c.id}-${c.access_hash}`,
+      }));
 
     this.storeAccountInformation(profileId, GenericAccountProp.FOLDERS, channels);
   }

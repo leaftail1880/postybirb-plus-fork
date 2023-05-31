@@ -10,12 +10,13 @@
     "@types/node": "^17.0.21",
     "@types/react": "16.9.11",
     "@types/react-dom": "16.9.4",
+    "@vkontakte/superappkit": "^1.60.0",
     "antd": "^3.26.20",
     "axios": "^0.21.4",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
-    "mobx": "^5.15.7",
-    "mobx-react": "^6.3.1",
+    "mobx": "5.15.7",
+    "mobx-react": "6.3.1",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^8.4.1",
     "postybirb-commons": "file:../commons",
@@ -38,7 +39,7 @@
     "build:tailwind": "tailwind build -i src/styles/index.css -o public/styles/tailwind.css",
     "build:antd-tweaks": "tailwind build -i src/styles/antd-dark-tweaks.css -o public/styles/dark-tweaks.css && tailwind build -i src/styles/antd-light-tweaks.css -o public/styles/light-tweaks.css && tailwind build -i src/styles/antd-base-tweaks.css -o public/styles/antd-tweaks.css",
     "build:themes": "lessc --js ./src/themes/light.less ./public/styles/light.css && lessc --js ./src/themes/dark.less ./public/styles/dark.css",
-    "build:compile": "node esbuild.config.js"
+    "build:compile": "node esbuild.config.js dev"
   },
   "homepage": "./",
   "browserslist": {
@@ -56,9 +57,9 @@
   "devDependencies": {
     "@types/lodash": "^4.14.194",
     "autoprefixer": "^10.4.14",
-    "eslint-plugin-mobx": "^0.0.9",
     "esbuild": "^0.17.19",
     "esbuild-postcss": "^0.0.4",
+    "eslint-plugin-mobx": "^0.0.9",
     "eslint-plugin-react-hooks": "^4.6.0",
     "less": "^3.13.1",
     "postcss-cli": "^10.1.0",

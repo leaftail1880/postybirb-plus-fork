@@ -122,7 +122,6 @@ function createWindow() {
     height: mainWindowState.height,
     minWidth: 500,
     minHeight: 500,
-    // titleBarStyle: 'hidden',
     autoHideMenuBar: true,
     icon,
     title: 'PostyBirb',
@@ -155,6 +154,8 @@ function createWindow() {
   });
   mainWindow.on('closed', () => {
     mainWindow = null;
+
+    if (global.settingsDB.get('quitOnClose').value()) return app.quit();
     if (global.tray && util.isWindows()) {
       clearTimeout(backgroundAlertTimeout);
       if (!hasNotifiedAboutBackground) {
@@ -199,6 +200,14 @@ function buildTray(image: Electron.NativeImage): Tray {
       label: 'Open',
       click() {
         show();
+      },
+    },
+    {
+      label: 'Quit on close',
+      type: 'checkbox',
+      checked: global.settingsDB.get('quitOnClose').value(),
+      click(event: any) {
+        global.settingsDB.set('quitOnClose', event.checked).write();
       },
     },
     {
